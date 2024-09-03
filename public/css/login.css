@@ -1,0 +1,117 @@
+/* Use the custom font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif; /* Update font-family */
+    background-image: url('C:\laragon\www\everlastingmoment\public\images\backgroundlogin.png');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 800px;
+    height: 550px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.left-panel {
+    background-color: #6E9FC1;
+    color: white;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px; /* Add padding to center the logo better */
+}
+
+.logo {
+    text-align: center; /* Center the logo text */
+}
+
+.logo img {
+    width: 150px;
+    margin-bottom: 10px; /* Add margin to separate image and text */
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 20px;
+    text-transform: lowercase; /* Ensure text is lowercase */
+    letter-spacing: 3px; /* Adjust letter spacing */
+    font-weight: 700; /* Make text bold */
+    line-height: 1.5; /* Adjust line height for spacing between the lines */
+    color: #A3C7E8;
+}
+
+.right-panel {
+    background: white;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 40px;
+}
+
+.right-panel h2 {
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+    display: flex;           /* Add flexbox to center the button */
+    flex-direction: column;  /* Make form items align vertically */
+    align-items: center;     /* Center align items horizontally */
+}
+
+.input-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    width: auto; /* Make the width automatic */
+    padding: 10px 20px; /* Adjust padding for a smaller button */
+    background-color: #365B80;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Ensure font size matches */
+    font-weight: 700; /* Make text bold */
+    margin: 0 auto; /* Center the button */
+}
+
+
+button:hover {
+    background-color: #357ab7;
+}
+
+p {
+    margin-top: 20px;
+    color: #777;
+    font-size: 14px; /* Ensure font size matches */
+}
+
+p a {
+    color: #365B80;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,134 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F3F5F9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-weight: bold;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.header img {
+    height: 50px;
+}
+
+.header h2 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    color: #000000;
+}
+
+.container {
+    background-color: #6E9FC1;
+    padding: 20px;
+    border-radius: 10px;
+    width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    margin-top: 60px;
+}
+
+.container h2 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.detail {
+    margin-bottom: 15px;
+    color: #000000;
+}
+
+.detail span {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    width: 800px;
+    position: relative;
+}
+
+.actions .back {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    left: 0;
+}
+
+.center-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 0 auto;
+}
+
+.actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.actions .accept {
+    background: linear-gradient(45deg, #6E9FC1, #6E9FC1);
+    color: white;
+}
+
+.actions .accept:hover {
+    background: linear-gradient(45deg, #45a049, #66bb6a);
+}
+
+.actions .reject {
+    background: linear-gradient(45deg, #FF0404, #6E9FC1);
+    color: white;
+}
+
+.actions .reject:hover {
+    background: linear-gradient(45deg, #e53935, #e57373);
+}
+
+.transfer-proof {
+    display: flex;
+    align-items: center;
+}
+
+.transfer-proof img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.transfer-proof a {
+    color: #070707;
+    font-weight: normal; /* Menghilangkan bold */
+}
