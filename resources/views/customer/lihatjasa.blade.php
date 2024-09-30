@@ -28,7 +28,7 @@
                         @foreach ($data1->dt_katalog as $gambar )
                         <?php $img=$gambar->gambar; ?>
                             <div class="carousel-item {{$i==0?'active':''}}">
-                                <img class="d-block w-100" style="height:200px;" 
+                                <img class="d-block w-100" style="height:200px;"
                                     src='{{ asset("images/catalogs/$img") }}' alt="{{"image"}}">
                             </div>
                         <?php $i++ ?>
@@ -47,7 +47,7 @@
                     <?php $i=0?>
                         @foreach ($data1->dt_katalog as $gambar )
                         <?php $img=$gambar->gambar; ?>
-                            <img src='{{ asset("images/catalogs/$img") }}' alt="{{"gambar"}}" class="thumbnail {{$i==0?'':''}}" 
+                            <img src='{{ asset("images/catalogs/$img") }}' alt="{{"gambar"}}" class="thumbnail {{$i==0?'':''}}"
                                     data-target="#carouselExampleIndicators" data-slide-to="{{$i}}">
                         <?php $i++ ?>
                         @endforeach
@@ -76,11 +76,9 @@
             <h2>Kategori : </h2>
             <p>{{$data2->detailPJ->kategori}}</p>
         </div>
-        @foreach ($data1->dt_katalog as $data)
         <div class="btn-group" role="group" aria-label="Button group">
             <a href="{{ route('catalog.edit', $data->id_katalog) }}" class="btn btn-primary">Edit</a>
         </div>
-        @endforeach
         <div class="btn-group" role="group" aria-label="Button group">
             <a href="#" class="btn btn-danger">Hapus</a>
         </div>
@@ -101,7 +99,7 @@
     @else
     <div class="footer">
         <a href="https://wa.me/{{$data2->detailPJ->pengguna->no_telp}}"><button class="chat">Chat</button></a>
-        <a href="/pesan/{{$url}}"><button class="order">Pesan</button></a>        
+        <a href="/pesan/{{$url}}"><button class="order">Pesan</button></a>
     </div>
     @endauth
     </div>
