@@ -31,7 +31,7 @@
         @foreach ($data as $category)
         <div class="category-item p-2">
                 <div class="text-center">
-                    <img class="category-icon" src="{{ asset('images/categories/' . $category['gambar_kategori']) }}" alt="{{ $category['name'] }}">
+                    <img class="category-icon" src="{{ asset('images/categories/' . $category['gambar_kategori']) }}" alt="{{ $category['judul_kategori'] }}">
                     {{-- <!-- <img class="category-icon" src="{{ asset('images/categories/' . $category['image']) }}" alt="{{ $category['name'] }}"> --> --}}
                 </div>
                 <p>{{ $category['judul_kategori'] }}</p>
@@ -56,10 +56,10 @@
         </div> --}}
         @foreach($data2 as $katalog)
         <div class="card">
-            <?php 
+            <?php
                 if (isset($katalog->dt_katalog[0]->gambar)) {
                     # code...
-                    $gambar = $katalog->dt_katalog[0]->gambar; 
+                    $gambar = $katalog->dt_katalog[0]->gambar;
                 }
                 else {
                     $gambar=asset("images/logoevmo.png");
@@ -73,13 +73,13 @@
                     $harga='';
                 }
             ?>
-            <img src="{{filter_var(asset("images/catalogs/$gambar"), FILTER_VALIDATE_URL)}}" onerror="this.onerror=null; this.src='{{ $gambar }}';" 
+            <img src="{{filter_var(asset("images/catalogs/$gambar"), FILTER_VALIDATE_URL)}}" onerror="this.onerror=null; this.src='{{ $gambar }}';"
                 class="card-img-top" alt="{{$gambar}}" style="width: 300px; height:150px">
             <div class="card-body">
                 <h5 class="card-title">{{$katalog['judul']}}</h5>
                 <p class="card-text">{{$harga}}</p>
                 <div class="move-right">
-                    <a href="/lihatjasa/{{$katalog->id_katalog}}" class="">Lihat detail</a>
+                    <a href="/lihatjasa/{{$katalog['id_katalog']}}" class="">Lihat detail</a>
                 </div>
             </div>
         </div>

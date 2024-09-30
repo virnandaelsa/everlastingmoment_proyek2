@@ -199,19 +199,25 @@
                 <button class="btn-signin">SIGN IN</button> --}}
             </div>
         </div>
-        @auth
-            @if (auth()->user()->role==1)
+        {{-- @auth
+            @if (auth()->user()->role==1) --}}
+            @if($role==1)
                 @include('customer.beranda.pjBeranda')
             @endif
-        @endauth
-        @auth
-            @if (auth()->user()->role==0)
+            {{-- @endif
+        @endauth --}}
+        {{-- @auth
+            @if (auth()->user()->role==0) --}}
+            @if($role==0)
                 @include('customer.beranda.isiBeranda')
             @endif
-        @endauth
-        @guest
+            {{-- @endif
+        @endauth --}}
+        {{-- @guest --}}
+        @if($role != 1 && $role != 0)
             @include('customer.beranda.isiBeranda')
-        @endguest
+        @endif
+        {{-- @endguest --}}
     </div>
 {{-- </div> --}}
 

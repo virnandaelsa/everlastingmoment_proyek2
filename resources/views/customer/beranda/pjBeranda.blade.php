@@ -1,10 +1,13 @@
     <div class="penawaran my-4">
-        @auth @if (auth()->user()->role==1)
+        {{-- @auth @if (auth()->user()->role==1) --}}
+        @if($role==1)
         <h4 class="bold-text">Tambah Katalog Anda Sekarang!</h4>
         <a href="/tambah_katalog" class="btn btn-primary">TAMBAH KATALOG</a>
-        @endif @endauth
+        @endif
+        {{-- @endif @endauth --}}
     </div>
-    @auth @if (auth()->user()->role==1)
+    {{-- @auth @if (auth()->user()->role==1) --}}
+    @if($role==1)
     <div class="recommendations my-4">
         <h4 class="bold-text">KATALOG SAYA</h4>
         <div class="d-flex flex-wrap">
@@ -12,7 +15,7 @@
             <div class="card">
                 @php
                     if (isset($katalog->dt_katalog[0]->gambar)) {
-                        $gambar = $katalog->dt_katalog[0]->gambar; 
+                        $gambar = $katalog->dt_katalog[0]->gambar;
                     }
                     else {
                         $gambar=asset("images/logoevmo.png");
@@ -37,9 +40,9 @@
 
             @foreach($data1 as $katalog)
             <div class="card">
-                <?php 
+                <?php
                     if (isset($katalog->dt_katalog[0]->gambar)) {
-                        $gambar = $katalog->dt_katalog[0]->gambar; 
+                        $gambar = $katalog->dt_katalog[0]->gambar;
                     }
                     else {
                         $gambar=asset("images/logoevmo.png");
@@ -51,17 +54,18 @@
                         $harga='';
                     }
                 ?>
-                <img src="{{filter_var(asset("images/catalogs/$gambar"), FILTER_VALIDATE_URL)}}" onerror="this.onerror=null; this.src='{{ $gambar }}';" 
+                <img src="{{filter_var(asset("images/catalogs/$gambar"), FILTER_VALIDATE_URL)}}" onerror="this.onerror=null; this.src='{{ $gambar }}';"
                     class="card-img-top" alt="{{$gambar}}" style="width: 300px; height:150px">
                 <div class="card-body">
-                    <h5 class="card-title">{{$katalog->judul}}</h5>
+                    <h5 class="card-title">{{$katalog['judul']}}</h5>
                     <p class="card-text">{{$harga}}</p>
                     <div class="move-right">
-                        <a href="/lihatjasa/{{$katalog->id_katalog}}" class="">Lihat detail</a>
+                        <a href="/lihatjasa/{{$katalog['id_katalog']}}" class="">Lihat detail</a>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
-    @endif @endauth
+    @endif
+    {{-- @endif @endauth --}}

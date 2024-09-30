@@ -21,22 +21,50 @@ class KatalogCustomerController extends Controller
 {
     public function index()
     {
-        $data = kategori::all();
-        $data1=[];
-        if (auth()->check()) {
-            $a=auth()->user()->role; $b=auth()->user()->id_user;
-            // dd(auth()->user());
-            if($a==1){
-                $pj=DB::table('detailPJ')->where('id_user',$b)->first()->id_detailPJ;
-                $data1 = katalog::with("dt_katalog")->get()->where('id_detailPJ','==',$pj);
-            }
-            }
-            $data2 = katalog::with("dt_katalog")->get();
-            return view('customer.beranda', [
-                'data' => $data,
-                'data1' => $data1,
-                'data2' => $data2,
-                ] );
+        // $data = kategori::all();
+        // $data1=[];
+        // if (auth()->check()) {
+        //     $a=auth()->user()->role; $b=auth()->user()->id_user;
+        //     // dd(auth()->user());
+        //     if($a==1){
+        //         $pj=DB::table('detailPJ')->where('id_user',$b)->first()->id_detailPJ;
+        //         $data1 = katalog::with("dt_katalog")->get()->where('id_detailPJ','==',$pj);
+        //     }
+        //     }
+        //     $data2 = katalog::with("dt_katalog")->get();
+        //     return view('customer.beranda', [
+        //         'data' => $data,
+        //         'data1' => $data1,
+        //         'data2' => $data2,
+        //         ] );
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/katalog', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . session("token")
+            ]
+        ]);
+
+        $semuaData = json_decode($response->getBody()->getContents(), true);
+        // dd($semuaData);
+
+        $data  = $semuaData["data"]["kategori"];
+        $data1 = [];
+        $data2 = $semuaData["data"]["detail_katalog"];
+        $role  = $semuaData["data"]["role"];
+
+        if ($role == 1) {
+            $data1 = $semuaData["data"]["penjual"];
+        }
+
+        return view('customer.beranda', [
+            'data'  => $data,
+            'data1' => $data1,
+            'data2' => $data2,
+            'role'  => $role
+        ]);
+
     }
     public function lihatjasa($id)
     {
