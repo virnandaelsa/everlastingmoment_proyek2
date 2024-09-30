@@ -215,6 +215,49 @@ class KatalogCustomerController extends Controller
         return redirect()->route('catalog.create')->with('success', 'Catalog added successfully.');
     }
 
+    public function edit_catalog($id_katalog)
+{
+    $catalog = Catalog::where("id_katalog", $id_katalog)->first();
+    // dd($catalog);
+    return view('customer.editjasa', compact('catalog'));
+}
+public function update_catalog(Request $request, $id_katalog)
+{
+    // dd($id_katalog);
+    $request->validate([
+        'judul_jasa' => 'required|string|max:255',
+        'deskripsi_jasa' => 'required|string',
+    ]);
+
+    // Update Katalog
+    $catalog = Catalog::find($id_katalog);
+    $catalog->judul = $request->judul_jasa;
+    $catalog->deskripsi = $request->deskripsi_jasa;
+    $catalog->save();
+
+    // Update Detail Katalog
+    // foreach ($request->judul_jasa_tawaran as $index => $judul) {
+    //     $dt_katalog = dt_katalog::where('id_katalog', $id_dt_katalog)->skip($index)->first();
+    //     if ($dt_katalog) {
+    //         $dt_katalog->judul_variasi = $judul;
+    //         $dt_katalog->harga = $request->biaya[$index];
+            
+    //         if (isset($request->gambar_jasa[$index])) {
+    //             $image = $request->gambar_jasa[$index];
+    //             $name = time() . '_' . $index . '.' . $image->getClientOriginalExtension();
+    //             $destinationPath = public_path('/images/catalogs');
+    //             $image->move($destinationPath, $name);
+    //             $dt_katalog->gambar = $name;
+    //         }
+
+    //         $dt_katalog->save();
+    //     }
+    // }
+
+    return redirect()->route('lihatjasa', ['id' => $id_katalog])->with('success', 'Catalog updated successfully.');
+
+}
+
     public function store_administrasi(Request $request)
     {
 

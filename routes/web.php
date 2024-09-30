@@ -8,17 +8,21 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [App\Http\Controllers\KatalogCustomerController::class, 'index']);
-Route::get('/lihatjasa/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'lihatjasa']);
+Route::get('/lihatjasa/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'lihatjasa'])->name("lihatjasa");
 Route::get('/pesan/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'pesan'])->middleware("auth");
 Route::post('/pesan', [App\Http\Controllers\KatalogCustomerController::class, 'store_pesan'])->name('pesan.store')->middleware("auth");
 Route::get('/tambah_katalog', [App\Http\Controllers\KatalogCustomerController::class, 'tambah_katalog'])->name('catalog.create');
 Route::post('/tambah-katalog', [KatalogCustomerController::class, 'store_catalogs'])->name('catalog.store');
+Route::get('/catalog/edit/{id}', [KatalogCustomerController::class, 'edit_catalog'])->name('catalog.edit');
+Route::put('/catalog/update/{id}', [KatalogCustomerController::class, 'update_catalog'])->name('catalog.update');
+
+
 Route::get('/pemesanan', [App\Http\Controllers\KatalogCustomerController::class, 'pemesanan']);
 Route::get('/dp', [App\Http\Controllers\KatalogCustomerController::class, 'dp']);
 Route::get('/pelunasan', [App\Http\Controllers\KatalogCustomerController::class, 'pelunasan']);
 Route::get('/status_pemesanan', [App\Http\Controllers\KatalogCustomerController::class, 'status_pesanan']);
 Route::get('/reviewcustomer', [App\Http\Controllers\KatalogCustomerController::class, 'review_customer']);
-Route::get('/lihatjasa_pj', [App\Http\Controllers\KatalogCustomerController::class, 'lihatjasa_pj']);
+Route::get('/lihatjasa_pj', [App\Http\Controllers\KatalogCustomerController::class, 'lihatjasa_pj'])->name("lihatjasa_pj");
 
 Route::get('/administrasi', [App\Http\Controllers\KatalogCustomerController::class, 'lengkapi_administrasi'])->middleware("auth");
 Route::post('/administrasi', [App\Http\Controllers\KatalogCustomerController::class, 'store_administrasi'])->name('sfa');
