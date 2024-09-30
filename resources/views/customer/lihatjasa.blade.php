@@ -70,28 +70,20 @@
         <div class="description">
             <h2>Deskripsi</h2>
             <p>{{$data1->deskripsi}}</p>
-            {{-- <p>Arabian look identik dengan riasan di bagian mata dengan ciri penggunaan bulu mata yang tebal dan menggunakan model smokey eyes. Arabian makeup menggunakan eyeshadow yang lebih dari satu warna karena memanfaatkan style bold make up.</p> --}}
-            {{-- <p>Paket 1:</p>
-            <ul>
-                <li>Make up pengantin wanita (beserta hairdo/hijabdo) dan pengantin pria</li>
-                <li>Make up 4 orang tua (2 wanita dan 2 pria)</li>
-                <li>Make up 4 terima tamu</li>
-            </ul>
-            <p>Paket 2:</p>
-            <ul>
-                <li>Make up pengantin wanita (beserta hairdo/hijabdo) dan pengantin pria</li>
-                <li>Make up 4 orang tua (2 wanita dan 2 pria)</li>
-            </ul>
-            <p>Paket 3:</p>
-            <ul>
-                <li>Make up pengantin wanita (beserta hairdo/hijabdo) dan pengantin pria</li>
-            </ul> --}}
         </div>
         <hr>
         <div class="categories">
             <h2>Kategori : </h2>
             <p>{{$data2->detailPJ->kategori}}</p>
-    </div>
+        </div>
+        @foreach ($data1->dt_katalog as $data)
+        <div class="btn-group" role="group" aria-label="Button group">
+            <a href="{{ route('catalog.edit', $data->id_katalog) }}" class="btn btn-primary">Edit</a>
+        </div>
+        @endforeach
+        <div class="btn-group" role="group" aria-label="Button group">
+            <a href="#" class="btn btn-danger">Hapus</a>
+        </div>
     @php
         $url = explode('/', "$_SERVER[REQUEST_URI]");
         $url = end($url);
