@@ -13,15 +13,15 @@
                 <a href="/"><img src="{{ asset('icon/bxs_home.png') }}" alt="home" class="img-fluid" style="width: 30px;"></a>
             </div>
             {{-- @if (auth()->user()->role == 1) --}}
-            @if($role==1)
+            {{-- @if($role==1) --}}
                 <div class="p-2">
                     <a href="/datapesanan"><img src="{{ asset('icon/icon-park-solid_transaction.png') }}" alt="Detail Pesanan" class="img-fluid" style="width: 30px;"></a>
                 </div>
-            @else
+            {{-- @else --}}
             <div class="p-2">
                 <a href="/status_pemesanan"><img src="{{ asset('icon/icon-park-solid_transaction.png') }}" alt="Detail Pesanan" class="img-fluid" style="width: 30px;"></a>
             </div>
-            @endif
+            {{-- @endif --}}
             {{-- <div class="p-2">
                 <a href="/notifikasi"><img src="{{ asset('icon/iconamoon_notification-fill.png') }}" alt="Notification" class="img-fluid" style="width: 30px;"></a>
             </div> --}}

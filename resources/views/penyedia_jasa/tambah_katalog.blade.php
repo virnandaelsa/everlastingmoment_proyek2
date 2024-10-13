@@ -89,6 +89,7 @@
 </head>
 <body>
 
+    {{-- @dd($data) --}}
     <div class="top-bar">
         <img src="{{ asset('images/logoevmo.png') }}" alt="Logo" class="logo">
         <img src="path/to/profile-picture.jpg" alt="Profile Picture" class="profile-picture rounded-circle">
@@ -129,16 +130,16 @@
             </div>
             <div class="form-group">
                 <label for="kategori-jasa">Kategori jasa</label>
-                <input class="form-control" id="kategori-jasa" name="kategori_jasa" value="{{ $data[0]->kategori }}" readonly></input>
+                <input class="form-control" id="kategori-jasa" name="kategori_jasa" value="{{ $data['kategori'] }}" readonly></input>
             </div>
 
             <div class="form-group">
                 <label for="alamat">Alamat</label>
-                <input type="text" class="form-control" id="alamat" name="alamat" value="{{ auth()->user()->alamat }}" placeholder="Alamat" readonly>
+                <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $user['alamat'] }}" placeholder="Alamat" readonly>
             </div>
             <div class="form-group">
                 <label for="nomor-telepon">Nomor telepon</label>
-                <input type="text" class="form-control" id="nomor-telepon" value="{{ $user[0]->no_telp }}" name="nomor_telepon"  readonly placeholder="Nomor telepon">
+                <input type="text" class="form-control" id="nomor-telepon" value="{{ $user['no_telp'] }}" name="nomor_telepon"  readonly placeholder="Nomor telepon">
             </div>
             {{-- <div class="form-group">
                 <label for="gambar-katalog">Gambar katalog jasa</label>
@@ -157,16 +158,16 @@
                 <div class="service-detail-group">
                     <div class="form-group">
                         <label for="judul-jasa-tawaran">Judul variasi</label>
-                        <input type="text" class="form-control" id="judul-jasa-tawaran" name="judul_jasa_tawaran[]" placeholder="Judul Jasa">
+                        <input type="text" class="form-control" id="judul-jasa-tawaran" name="judul_jasa_tawaran" placeholder="Judul Jasa">
                     </div>
                     <div class="form-group">
                         <label for="biaya">Harga</label>
-                        <input type="text" class="form-control" id="biaya" name="biaya[]" placeholder="Harga">
+                        <input type="text" class="form-control" id="biaya" name="biaya" placeholder="Harga">
                     </div>
                     <div class="form-group">
                         <label for="gambar-jasa">Gambar jasa</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="gambar-jasa" name="gambar_jasa[]" max="5" >
+                            <input type="file" class="custom-file-input" id="gambar-jasa" name="gambar_jasa" max="5" >
                             <label class="custom-file-label" for="gambar-jasa">Choose file</label>
                         </div>
                     </div>
@@ -184,13 +185,13 @@
 
             <div class="form-group">
                 <label for="kategori-jasa">BANK</label>
-                <input class="form-control" id="kategori-jasa" value="{{ $data[0]->bank }}" name="kategori_jasa" readonly>
+                <input class="form-control" id="kategori-jasa" value="{{ $data['bank'] }}" name="kategori_jasa" readonly>
                     <!-- Tambahkan opsi lain sesuai kebutuhan -->
                 </input>
             </div>
             <div class="form-group">
                 <label for="nomor-rekening">Nomor rekening</label>
-                <input type="text" value="{{ $data[0]->no_rek }}" class="form-control" id="nomor-rekening" name="nomor_rekening" placeholder="Nomor rekening" readonly>
+                <input type="text" value="{{ $data['no_rek'] }}" class="form-control" id="nomor-rekening" name="nomor_rekening" placeholder="Nomor rekening" readonly>
             </div>
             <button type="submit" class="btn btn-block">KIRIM</button>
         </form>

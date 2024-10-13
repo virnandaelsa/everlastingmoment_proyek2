@@ -14,7 +14,8 @@ Route::post('/pesan', [App\Http\Controllers\KatalogCustomerController::class, 's
 Route::get('/tambah_katalog', [App\Http\Controllers\KatalogCustomerController::class, 'tambah_katalog'])->name('catalog.create');
 Route::post('/tambah-katalog', [KatalogCustomerController::class, 'store_catalogs'])->name('catalog.store');
 Route::get('/catalog/edit/{id}', [KatalogCustomerController::class, 'edit_catalog'])->name('catalog.edit');
-Route::put('/catalog/update/{id}', [KatalogCustomerController::class, 'update_catalog'])->name('catalog.update');
+Route::post('/catalog/update/{id}', [KatalogCustomerController::class, 'update_catalog'])->name('catalog.update');
+Route::post('/catalog/delete/{id}', [KatalogCustomerController::class, 'destroy_catalog'])->name('catalog.delete');
 
 
 Route::get('/pemesanan', [App\Http\Controllers\KatalogCustomerController::class, 'pemesanan']);
