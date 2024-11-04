@@ -21,34 +21,82 @@ class KatalogCustomerController extends Controller
 {
     public function index()
     {
-        $data = kategori::all();
-        $data1=[];
-        if (auth()->check()) {
-            $a=auth()->user()->role; $b=auth()->user()->id_user;
-            // dd(auth()->user());
-            if($a==1){
-                $pj=DB::table('detailPJ')->where('id_user',$b)->first()->id_detailPJ;
-                $data1 = katalog::with("dt_katalog")->get()->where('id_detailPJ','==',$pj);
-            }
-            }
-            $data2 = katalog::with("dt_katalog")->get();
-            return view('customer.beranda', [
-                'data' => $data,
-                'data1' => $data1,
-                'data2' => $data2,
-                ] );
+        // $data = kategori::all();
+        // $data1=[];
+        // if (auth()->check()) {
+        //     $a=auth()->user()->role; $b=auth()->user()->id_user;
+        //     // dd(auth()->user());
+        //     if($a==1){
+        //         $pj=DB::table('detailPJ')->where('id_user',$b)->first()->id_detailPJ;
+        //         $data1 = katalog::with("dt_katalog")->get()->where('id_detailPJ','==',$pj);
+        //     }
+        //     }
+        //     $data2 = katalog::with("dt_katalog")->get();
+        //     return view('customer.beranda', [
+        //         'data' => $data,
+        //         'data1' => $data1,
+        //         'data2' => $data2,
+        //         ] );
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/katalog', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . session("token")
+            ]
+        ]);
+
+        $semuaData = json_decode($response->getBody()->getContents(), true);
+        // dd($semuaData);
+
+        $data  = $semuaData["data"]["kategori"];
+        $data1 = [];
+        $data2 = $semuaData["data"]["detail_katalog"];
+        $role  = $semuaData["data"]["role"];
+
+        if ($role == 1) {
+            $data1 = $semuaData["data"]["penjual"];
+        }
+
+        return view('customer.beranda', [
+            'data'  => $data,
+            'data1' => $data1,
+            'data2' => $data2,
+            'role'  => $role
+        ]);
+
     }
     public function lihatjasa($id)
     {
-        $data1 = katalog::with('dt_katalog')->find($id);
-        $data2 = katalog::with('detailPJ.pengguna')->find($id);
-        // dd($data2);
-        return view('customer.lihatjasa',
-            [
+        // $data1 = katalog::with('dt_katalog')->find($id);
+        // $data2 = katalog::with('detailPJ.pengguna')->find($id);
+        // // dd($data1);
+        // // dd($data2);
+        // return view('customer.lihatjasa',
+        //     [
+        //     'data1' => $data1,
+        //     'data2' => $data2,
+        //     ]
+        // );
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/lihat-jasa/' . $id, [
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ]
+        ]);
+
+        $semuaData = json_decode($response->getBody()->getContents(), true);
+
+        $data1 = $semuaData["data"]["detail_katalog"];
+        $data2 = $semuaData["data"]["detail_penjual"];
+
+        return view('customer.lihatjasa', [
             'data1' => $data1,
             'data2' => $data2,
-            ]
-        );
+        ]);
+
     }
     public function pesan($id)
     {
@@ -146,73 +194,284 @@ class KatalogCustomerController extends Controller
     }
     public function tambah_katalog()
     {
-        $hehe = auth()->user()->id_user;
-        $data = DB::table('detailPJ')->where('id_user','=',$hehe)->get();
-        $user = DB::table('pengguna')->where('id_user','=',$hehe)->get();
-        // dd($data);
+        // $hehe = auth()->user()->id_user;
+        // $data = DB::table('detailPJ')->where('id_user','=',$hehe)->get();
+        // $user = DB::table('pengguna')->where('id_user','=',$hehe)->get();
+        // // dd($data);
+
+        // return view('penyedia_jasa.tambah_katalog',[
+        //     'data' => $data,
+        //     'user' => $user
+        // ]);
+
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/katalog/create', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . session("token")
+            ]
+        ]);
+
+        $semuaData = json_decode($response->getBody()->getContents(), true);
+
+        $data = $semuaData["data"]["penjual"];
+        $user = $semuaData["data"]["users"];
 
         return view('penyedia_jasa.tambah_katalog',[
-            'data' => $data,
-            'user' => $user
-        ]);
+                'data' => $data,
+                'user' => $user
+            ]);
     }
 
     public function store_catalogs(Request $request)
     {
-        $request->validate([
-            'judul_jasa' => 'required|string|max:255',
-            'deskripsi_jasa' => 'required|string',
-            'kategori_jasa' => 'required|string',
-            'alamat' => 'required|string',
-            'nomor_telepon' => 'required|string',
-            // 'gambar_katalog' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            // 'metode_pembayaran' => 'required|string',
-            'nomor_rekening' => 'required|string',
-        ]);
+        // $request->validate([
+        //     'judul_jasa' => 'required|string|max:255',
+        //     'deskripsi_jasa' => 'required|string',
+        //     'kategori_jasa' => 'required|string',
+        //     'alamat' => 'required|string',
+        //     'nomor_telepon' => 'required|string',
+        //     // 'gambar_katalog' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     // 'metode_pembayaran' => 'required|string',
+        //     'nomor_rekening' => 'required|string',
+        // ]);
 
-        $user = auth()->user()->id_user;
-        $id_pj = DB::select("select * from detailPJ where id_user = $user");
-        $user = DB::table('detailPJ')->where('id_user',$user)->get();
-        $user = $user[0]->id_detailPJ;
+        // $user = auth()->user()->id_user;
+        // $id_pj = DB::select("select * from detailPJ where id_user = $user");
+        // $user = DB::table('detailPJ')->where('id_user',$user)->get();
+        // $user = $user[0]->id_detailPJ;
 
-        $catalog = new Catalog();
-        $catalog->id_detailPJ = $id_pj[0]->id_detailPJ;
-        $catalog->judul = $request->judul_jasa;
-        $catalog->deskripsi = $request->deskripsi_jasa;
-        $catalog->save();
+        // $catalog = new Catalog();
+        // $catalog->id_detailPJ = $id_pj[0]->id_detailPJ;
+        // $catalog->judul = $request->judul_jasa;
+        // $catalog->deskripsi = $request->deskripsi_jasa;
+        // $catalog->save();
 
-        $dt_katalog = new dt_katalog();
-        $id_dt_katalog = DB::select("select id_katalog from katalog where id_detailPJ = $user order by created_at desc limit 1");
-        // dd($id_dt_katalog[0]);
+        // $dt_katalog = new dt_katalog();
+        // $id_dt_katalog = DB::select("select id_katalog from katalog where id_detailPJ = $user order by created_at desc limit 1");
+        // // dd($id_dt_katalog[0]);
 
-        // $catalog->kategori_jasa = $request->kategori_jasa;
-        // $catalog->alamat = $request->alamat;
-        // $catalog->nomor_telepon = $request->nomor_telepon;
+        // // $catalog->kategori_jasa = $request->kategori_jasa;
+        // // $catalog->alamat = $request->alamat;
+        // // $catalog->nomor_telepon = $request->nomor_telepon;
 
-        if ($request->hasFile('gambar_jasa')) {
-            // $image = $request->file('gambar_katalog');
-            // $name = time().'.'.$image->getClientOriginalExtension();
-            // $destinationPath = public_path('/images/catalogs');
-            // $image->move($destinationPath, $name);
+        // if ($request->hasFile('gambar_jasa')) {
+        //     // $image = $request->file('gambar_katalog');
+        //     // $name = time().'.'.$image->getClientOriginalExtension();
+        //     // $destinationPath = public_path('/images/catalogs');
+        //     // $image->move($destinationPath, $name);
 
-            $image = $request->file('gambar_jasa')[0];
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/images/catalogs');
-            $image->move($destinationPath, $name);
+        //     $image = $request->file('gambar_jasa')[0];
+        //     $name = time().'.'.$image->getClientOriginalExtension();
+        //     $destinationPath = public_path('/images/catalogs');
+        //     $image->move($destinationPath, $name);
 
 
-            $dt_katalog->gambar = $name;
-            $dt_katalog->judul_variasi = $request->judul_jasa_tawaran[0];
-            $dt_katalog->harga = $request->biaya[0];
-            $dt_katalog->id_katalog = $id_dt_katalog[0]->id_katalog;
+        //     $dt_katalog->gambar = $name;
+        //     $dt_katalog->judul_variasi = $request->judul_jasa_tawaran[0];
+        //     $dt_katalog->harga = $request->biaya[0];
+        //     $dt_katalog->id_katalog = $id_dt_katalog[0]->id_katalog;
 
-            $dt_katalog->save();
+        //     $dt_katalog->save();
+        // }
+
+        // // $catalog->metode_pembayaran = $request->metode_pembayaran;
+        // // $catalog->nomor_rekening = $request->nomor_rekening;
+
+        // return redirect()->route('catalog.create')->with('success', 'Catalog added successfully.');
+
+        // dd($request->all());
+
+        $client = new \GuzzleHttp\Client();
+
+        $multipartData = [
+            [
+                'name'     => 'judul',
+                'contents' => $request->judul_jasa
+            ],
+            [
+                'name'     => 'deskripsi',
+                'contents' => $request->deskripsi_jasa
+            ],
+            [
+                'name'     => 'judul_variasi',
+                'contents' => $request->judul_jasa_tawaran // array
+            ],
+            [
+                'name'     => 'harga',
+                'contents' => $request->biaya // array
+            ]
+        ];
+
+        // Cek apakah ada file gambar
+        if ($request->hasFile('gambar_jasa')) { //array
+            $image = $request->file('gambar_jasa');
+
+            // Pastikan itu adalah instance UploadedFile
+            if ($image instanceof \Illuminate\Http\UploadedFile) {
+                $multipartData[] = [
+                    'name'     => 'gambar',  // Nama field di API
+                    'contents' => fopen($image->getPathname(), 'r'),  // Buka file
+                    'filename' => $image->getClientOriginalName()  // Nama asli file
+                ];
+            } else {
+                return response()->json(['error' => 'File tidak valid'], 400);
+            }
+        } else {
+            return response()->json(['error' => 'Tidak ada file yang diunggah'], 400);
         }
 
-        // $catalog->metode_pembayaran = $request->metode_pembayaran;
-        // $catalog->nomor_rekening = $request->nomor_rekening;
+        // Kirim request
+        try {
+            $response = $client->request('POST', 'http://127.0.0.1:8000/api/katalog/store', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . session("token")
+                ],
+                'multipart' => $multipartData
+            ]);
 
-        return redirect()->route('catalog.create')->with('success', 'Catalog added successfully.');
+            // return json_decode($response->getBody()->getContents(), true);
+
+            return redirect()->route('catalog.create')->with('success', 'Catalog added successfully.');
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+    }
+
+    public function edit_catalog($id_katalog)
+    {
+        // $catalog = Catalog::where("id_katalog", $id_katalog)->first();
+        // $detail_katalog = dt_katalog::where('id_katalog', $id_katalog)->get();
+        // // dd($detail_katalog);
+        // return view('customer.editjasa', compact('catalog'));
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/katalog/edit/' . $id_katalog, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . session("token")
+            ]
+        ]);
+
+        $semuaData = json_decode($response->getBody()->getContents(), true);
+
+        $catalog = $semuaData['data']['katalog'];
+        $detail_katalog = $semuaData['data']['detail_katalog'];
+
+        return view('customer.editjasa', [
+            'catalog' => $catalog,
+            'detail_katalog' => $detail_katalog
+        ]);
+
+    }
+    public function update_catalog(Request $request, $id_katalog)
+    {
+        // dd($id_katalog);
+        // $request->validate([
+        //     'judul_jasa' => 'required|string|max:255',
+        //     'deskripsi_jasa' => 'required|string',
+        // ]);
+
+        // Update Katalog
+        // $catalog = Catalog::find($id_katalog);
+        // $catalog->judul = $request->judul_jasa;
+        // $catalog->deskripsi = $request->deskripsi_jasa;
+        // $catalog->save();
+
+        // Update Detail Katalog
+        // foreach ($request->judul_jasa_tawaran as $index => $judul) {
+        //     $dt_katalog = dt_katalog::where('id_katalog', $id_dt_katalog)->skip($index)->first();
+        //     if ($dt_katalog) {
+        //         $dt_katalog->judul_variasi = $judul;
+        //         $dt_katalog->harga = $request->biaya[$index];
+
+        //         if (isset($request->gambar_jasa[$index])) {
+        //             $image = $request->gambar_jasa[$index];
+        //             $name = time() . '_' . $index . '.' . $image->getClientOriginalExtension();
+        //             $destinationPath = public_path('/images/catalogs');
+        //             $image->move($destinationPath, $name);
+        //             $dt_katalog->gambar = $name;
+        //         }
+
+        //         $dt_katalog->save();
+        //     }
+        // }
+
+        // dd($request->all());
+
+        $client = new \GuzzleHttp\Client();
+
+        $multipartData = [
+            [
+                'name'     => 'judul',
+                'contents' => $request->judul_jasa
+            ],
+            [
+                'name'     => 'deskripsi',
+                'contents' => $request->deskripsi_jasa
+            ],
+            [
+                'name'     => 'judul_variasi',
+                'contents' => $request->judul_jasa_tawaran // array
+            ],
+            [
+                'name'     => 'harga',
+                'contents' => $request->biaya // array
+            ]
+        ];
+
+        // Cek apakah ada file gambar
+        if ($request->hasFile('gambar_jasa')) { //array
+            $image = $request->file('gambar_jasa');
+
+            // Pastikan itu adalah instance UploadedFile
+            if ($image instanceof \Illuminate\Http\UploadedFile) {
+                $multipartData[] = [
+                    'name'     => 'gambar',  // Nama field di API
+                    'contents' => fopen($image->getPathname(), 'r'),  // Buka file
+                    'filename' => $image->getClientOriginalName()  // Nama asli file
+                ];
+            } else {
+                return response()->json(['error' => 'File tidak valid'], 400);
+            }
+        } else {
+            return response()->json(['error' => 'Tidak ada file yang diunggah'], 400);
+        }
+
+        // Kirim request
+        try {
+            $response = $client->request('POST', 'http://127.0.0.1:8000/api/katalog/update/'.$id_katalog, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . session("token")
+                ],
+                'multipart' => $multipartData
+            ]);
+
+            // return json_decode($response->getBody()->getContents(), true);
+
+            return redirect()->route('lihatjasa', ['id' => $id_katalog])->with('success', 'Catalog updated successfully.');
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+
+    }
+
+    public function destroy_catalog($id_katalog)
+    {
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST', 'http://127.0.0.1:8000/api/katalog/delete/'.$id_katalog, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . session("token")
+            ]
+        ]);
+
+        // return json_decode($response->getBody()->getContents(), true);
+
+        return redirect('/', );
     }
 
     public function store_administrasi(Request $request)

@@ -18,18 +18,19 @@
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <?php $i=0?>
-                        @foreach ($data1->dt_katalog as $gambar )
+                        @foreach ($data1['detail_katalog'] as $gambar )
                         <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}" class=" {{$i==0?'active':''}}"></li>
                         <?php $i++ ?>
                         @endforeach
                     </ol>
                     <div class="carousel-inner">
                     <?php $i=0?>
-                        @foreach ($data1->dt_katalog as $gambar )
-                        <?php $img=$gambar->gambar; ?>
+                        @foreach ($data1['detail_katalog'] as $gambar )
+                        <?php $img=$gambar['gambar']; ?>
+                        {{-- @dd($img) --}}
                             <div class="carousel-item {{$i==0?'active':''}}">
-                                <img class="d-block w-100" style="height:200px;" 
-                                    src='{{ asset("images/catalogs/$img") }}' alt="{{"image"}}">
+                                <img class="d-block w-100" style="height:200px;"
+                                    src='{{ url('http://localhost:8000/images/gambar_detail_katalog/'.$img) }}' alt="{{"image"}}">
                             </div>
                         <?php $i++ ?>
                         @endforeach
@@ -45,20 +46,20 @@
                 </div>
                 <div class="thumbnails mt-3">
                     <?php $i=0?>
-                        @foreach ($data1->dt_katalog as $gambar )
-                        <?php $img=$gambar->gambar; ?>
-                            <img src='{{ asset("images/catalogs/$img") }}' alt="{{"gambar"}}" class="thumbnail {{$i==0?'':''}}" 
+                        @foreach ($data1['detail_katalog'] as $gambar )
+                        <?php $img=$gambar['gambar']; ?>
+                            <img src='{{ url('http://localhost:8000/images/gambar_detail_katalog/'. $img) }}' alt="{{"gambar"}}" class="thumbnail {{$i==0?'':''}}"
                                     data-target="#carouselExampleIndicators" data-slide-to="{{$i}}">
                         <?php $i++ ?>
                         @endforeach
                 </div>
             </div>
             <div class="col-md-6 package-info">
-                <h1>{{$data2->judul}}</h1>
-                <p>{{($data2->detailPJ->nama_toko)}}</p>
-                <p>{{($data2->detailPJ->kategori)}}</p>
-                @foreach ($data1->dt_katalog as $data)
-                    <p class="text-dark">{{$data->judul_variasi}} : Rp {{$data->harga}},- </p>
+                <h1>{{$data2['judul']}}</h1>
+                <p>{{($data2['detail_penjual']['nama_toko'])}}</p>
+                <p>{{($data2['detail_penjual']['kategori'])}}</p>
+                @foreach ($data1['detail_katalog'] as $data)
+                    <p class="text-dark">{{$data['judul_variasi']}} : Rp {{$data['harga']}},- </p>
                 @endforeach
                 <div class="rating">
                     <span>⭐ 4.7 / 5</span>
@@ -69,29 +70,22 @@
         <hr>
         <div class="description">
             <h2>Deskripsi</h2>
-            <p>{{$data1->deskripsi}}</p>
-            {{-- <p>Arabian look identik dengan riasan di bagian mata dengan ciri penggunaan bulu mata yang tebal dan menggunakan model smokey eyes. Arabian makeup menggunakan eyeshadow yang lebih dari satu warna karena memanfaatkan style bold make up.</p> --}}
-            {{-- <p>Paket 1:</p>
-            <ul>
-                <li>Make up pengantin wanita (beserta hairdo/hijabdo) dan pengantin pria</li>
-                <li>Make up 4 orang tua (2 wanita dan 2 pria)</li>
-                <li>Make up 4 terima tamu</li>
-            </ul>
-            <p>Paket 2:</p>
-            <ul>
-                <li>Make up pengantin wanita (beserta hairdo/hijabdo) dan pengantin pria</li>
-                <li>Make up 4 orang tua (2 wanita dan 2 pria)</li>
-            </ul>
-            <p>Paket 3:</p>
-            <ul>
-                <li>Make up pengantin wanita (beserta hairdo/hijabdo) dan pengantin pria</li>
-            </ul> --}}
+            <p>{{$data1['deskripsi']}}</p>
         </div>
         <hr>
         <div class="categories">
             <h2>Kategori : </h2>
-            <p>{{$data2->detailPJ->kategori}}</p>
-    </div>
+            <p>{{$data2['detail_penjual']['kategori']}}</p>
+        </div>
+        <form action="{{ route('catalog.delete', $data1['id_katalog']) }}" method="POST">
+            @csrf
+            <div class="btn-group" role="group" aria-label="Button group">
+                <a href="{{ route('catalog.edit', $data1['id_katalog']) }}" class="btn btn-primary">Edit</a>
+            </div>
+            <div class="btn-group" role="group" aria-label="Button group">
+                <button type="submit" class="btn btn-danger">Hapus</button>
+            </div>
+        </form>
     @php
         $url = explode('/', "$_SERVER[REQUEST_URI]");
         $url = end($url);
@@ -101,15 +95,15 @@
         @else
         <div class="footer">
             <a href="https://wa.me/{{$data2->detailPJ->pengguna->no_telp}}"><button class="chat">Chat</button></a>
-            @foreach ($data1->dt_katalog as $data)
-                <a href="/pesan/{{$data->id_dt_katalog}}"><button class="order">Pesan ({{$data->judul_variasi}})</button></a>
+            @foreach ($data1['detail_katalog'] as $data)
+                <a href="/pesan/{{$data->id_detail_katalog}}"><button class="order">Pesan ({{$data->judul_variasi}})</button></a>
             @endforeach
         </div>
         @endif
     @else
     <div class="footer">
-        <a href="https://wa.me/{{$data2->detailPJ->pengguna->no_telp}}"><button class="chat">Chat</button></a>
-        <a href="/pesan/{{$url}}"><button class="order">Pesan</button></a>        
+        <a href="https://wa.me/{{$data2['detail_penjual']['user']['no_telp']}}"><button class="chat">Chat</button></a>
+        <a href="/pesan/{{$url}}"><button class="order">Pesan</button></a>
     </div>
     @endauth
     </div>

@@ -2,25 +2,26 @@
     <div class="text-center">
         <img src="{{ asset('images/logoevmo.png') }}" alt="Logo" class="img-fluid" style="width: 150px;">
     </div>
-    @auth
+    {{-- @auth
         @if (auth()->user()->role == 1)
-            {{-- sidebar untuk penyedia jasa --}}
+            sidebar untuk penyedia jasa
         @else
-            {{-- customer biasa aja ini --}}
-        @endif
+            customer biasa aja ini
+        @endif --}}
         <div class="d-flex flex-column align-items-center">
             <div class="p-2">
                 <a href="/"><img src="{{ asset('icon/bxs_home.png') }}" alt="home" class="img-fluid" style="width: 30px;"></a>
             </div>
-            @if (auth()->user()->role == 1)
+            {{-- @if (auth()->user()->role == 1) --}}
+            {{-- @if($role==1) --}}
                 <div class="p-2">
                     <a href="/datapesanan"><img src="{{ asset('icon/icon-park-solid_transaction.png') }}" alt="Detail Pesanan" class="img-fluid" style="width: 30px;"></a>
                 </div>
-            @else
+            {{-- @else --}}
             <div class="p-2">
                 <a href="/status_pemesanan"><img src="{{ asset('icon/icon-park-solid_transaction.png') }}" alt="Detail Pesanan" class="img-fluid" style="width: 30px;"></a>
             </div>
-            @endif
+            {{-- @endif --}}
             {{-- <div class="p-2">
                 <a href="/notifikasi"><img src="{{ asset('icon/iconamoon_notification-fill.png') }}" alt="Notification" class="img-fluid" style="width: 30px;"></a>
             </div> --}}
@@ -34,7 +35,7 @@
                 <a href="/helpcenter"><img src="{{ asset('icon/ic_baseline-help.png') }}" alt="Help Center" class="img-fluid" style="width: 30px;"></a>
             </div> --}}
         </div>
-    @else
-        {{-- KOSONG AJA YA --}}
-    @endauth
+    {{-- @else
+        KOSONG AJA YA
+    @endauth --}}
 </div>

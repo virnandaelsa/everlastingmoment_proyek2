@@ -9,6 +9,7 @@ class Catalog extends Model
 {
     use HasFactory;
     protected $table = 'katalog';
+    protected $primaryKey = 'id_katalog';
     protected $fillable = [
         'judul_jasa',
         'deskripsi_jasa',
@@ -18,5 +19,5 @@ class Catalog extends Model
         'gambar_katalog',
         'metode_pembayaran',
         'nomor_rekening',
-    ];
+    ]; 
 }
