@@ -58,7 +58,7 @@
         height: auto;
         margin-right: 20px; /* Space between image and text */
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .product-details {
@@ -88,7 +88,7 @@
     }
     .card {
         border-radius: 8px; /* Radius sudut card */
-        box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
         margin-bottom: 10px;
         padding: 15px;
     }
@@ -102,7 +102,7 @@
             display: flex;
             justify-content: left;
             align-items: center;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .circle img {
             width: 100%;

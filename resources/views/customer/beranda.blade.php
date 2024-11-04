@@ -2,7 +2,9 @@
 
 @section('content')
 
-<style>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
         /* Opsional: Tambahkan beberapa gaya pada tombol */
         .tombol-gambar {
             display: inline-block;
@@ -13,13 +15,15 @@
 
         .gambar img {
             display: block;
-            width: 50px; /* Sesuaikan lebar sesuai kebutuhan */
+            width: 50px;
+            /* Sesuaikan lebar sesuai kebutuhan */
             height: auto;
         }
 
         body {
             font-family: Arial, sans-serif;
         }
+
         .overlay {
             position: fixed;
             top: 0;
@@ -31,6 +35,7 @@
             justify-content: right;
             align-items: right;
         }
+
         .popup {
             background: #F3F5F9;
             padding: 20px;
@@ -38,13 +43,16 @@
             width: 550px;
             max-width: 100%;
         }
+
         .popup h2 {
             margin-top: 0;
         }
+
         .filter-section {
             margin-bottom: 20px;
             border-radius: 5px;
         }
+
         .filter-section h3 {
             margin: 10px 0;
         }
@@ -78,9 +86,9 @@
             display: none;
         }
 
-        .filter-section .checkbox-group input[type="checkbox"]:checked + label,
-        .filter-section .checkbox2 input[type="checkbox"]:checked + label,
-        .filter-section .range-buttons input[type="checkbox"]:checked + label {
+        .filter-section .checkbox-group input[type="checkbox"]:checked+label,
+        .filter-section .checkbox2 input[type="checkbox"]:checked+label,
+        .filter-section .range-buttons input[type="checkbox"]:checked+label {
             background: white;
             color: #4d8fba;
             border: 1px solid #2a5f8e;
@@ -105,6 +113,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         .filter-section1 input {
             width: calc(100% - 10px);
             padding: 10px;
@@ -112,15 +121,18 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         .filter-section input::placeholder {
             color: #ccc;
         }
+
         .filter-section .range-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
 
         }
+
         .filter-section .range-buttons button {
             flex: 1;
         }
@@ -129,6 +141,7 @@
         .apply-button {
             text-align: center;
         }
+
         .apply-button button {
             padding: 10px 20px;
             background: white;
@@ -137,6 +150,7 @@
             cursor: pointer;
             border: 1px solid #ccc;
         }
+
         .close-button {
             position: absolute;
             top: 10px;
@@ -147,33 +161,43 @@
             cursor: pointer;
         }
 
-    /* Media query untuk hp */
-@media (max-width: 480px) {
-    .popup {
-        width: 95%; /* Sesuaikan width untuk hp */
-    }
-    .filter-section .checkbox-group label,
-    .filter-section .checkbox2 label,
-    .filter-section .range-buttons label {
-        flex: 1 1 100%; /* Sesuaikan lebar label untuk hp */
-    }
-    .gambar img {
-        width: 30px; /* Sesuaikan lebar gambar untuk hp */
-    }
-}
+        /* Media query untuk hp */
+        @media (max-width: 480px) {
+            .popup {
+                width: 95%;
+                /* Sesuaikan width untuk hp */
+            }
 
-/* Media query untuk laptop */
-@media (min-width: 769px) {
-    .popup {
-        width: 550px; /* Kembali ke ukuran asli untuk laptop */
-    }
-    .filter-section .checkbox-group label,
-    .filter-section .checkbox2 label,
-    .filter-section .range-buttons label {
-        flex: 1 1 15%; /* Kembali ke ukuran asli untuk laptop */
-    }
-}
-</style>
+            .filter-section .checkbox-group label,
+            .filter-section .checkbox2 label,
+            .filter-section .range-buttons label {
+                flex: 1 1 100%;
+                /* Sesuaikan lebar label untuk hp */
+            }
+
+            .gambar img {
+                width: 30px;
+                /* Sesuaikan lebar gambar untuk hp */
+            }
+        }
+
+        /* Media query untuk laptop */
+        @media (min-width: 769px) {
+            .popup {
+                width: 550px;
+                /* Kembali ke ukuran asli untuk laptop */
+            }
+
+            .filter-section .checkbox-group label,
+            .filter-section .checkbox2 label,
+            .filter-section .range-buttons label {
+                flex: 1 1 15%;
+                /* Kembali ke ukuran asli untuk laptop */
+            }
+        }
+
+    </style>
+</head>
     <div class="content">
         @if (session('success'))
             <div class="alert alert-success" role="alert">
@@ -194,9 +218,6 @@
                 <button onclick="showPopup()">
                     <img src="{{ asset('images/filter.png') }}" alt="Gambar Tombol">
                 </button>
-
-                {{-- <button class="btn-signup">SIGN UP</button>
-                <button class="btn-signin">SIGN IN</button> --}}
             </div>
         </div>
         @auth

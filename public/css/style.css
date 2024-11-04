@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #6E9FC1,#ffffff, #ffffff); /* Gradient background */
+    background: #dae3e9; /* Gradient background */
 }
 
 .sidebar {
@@ -37,7 +37,7 @@ body {
 .content {
     margin-left: 100px;
     padding: 20px;
-    background: linear-gradient(to bottom, #6E9FC1, #ffffff, #ffffff); /* Gradient background for main content */
+    background: #dae3e9; /* Gradient background for main content */
     min-height: 100vh;
     border-radius: 10px;
 }
@@ -93,7 +93,7 @@ body {
     background-color: transparent;
     color: #fff;
 }
-    
+
 .search-bar .btn-signin {
     background-color: #365B80;
     border : none;
@@ -245,7 +245,7 @@ body {
 }
 
 .upload-section input[type="file"] {
-    
+
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
