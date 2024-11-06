@@ -29,11 +29,11 @@
             <img src="{{ asset('images/logoevmo.png') }}" alt="Logo" class="img-fluid" style="width: 80px;">
         </a>
 
-        @auth
+        @if($role == 0 || $role == 1)
         <div class="navbar-nav ms-auto d-flex flex-row align-items-center small-padding">
             <a class="nav-link" href="/">Home</a>
 
-            @if (auth()->user()->role == 1)
+            @if($role == 1)
                 {{-- Navbar link for service providers --}}
                 <a class="nav-link" href="/datapesanan">Pesanan</a>
             @else
@@ -46,6 +46,6 @@
         @else
             {{-- Display this if user is not authenticated --}}
             <span class="navbar-text ms-auto">Silakan login untuk melihat menu.</span>
-        @endauth
+        @endif
     </div>
 </header>
