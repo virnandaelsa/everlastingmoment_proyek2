@@ -207,7 +207,7 @@
             </button>
         </div>
     @endif
-    <div class="top-bar">
+    <!-- <div class="top-bar">
         <div class="search-bar">
             <input type="text" placeholder="Cari disini .....">
             @if(is_null($role))
@@ -219,7 +219,7 @@
                     <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
                 </svg>
             </button>
-        </div>
+        </div> -->
     </div>
     @if($role==1)
         @include('customer.beranda.pjBeranda')

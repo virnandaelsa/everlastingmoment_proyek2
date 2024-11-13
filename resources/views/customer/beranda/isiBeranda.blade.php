@@ -16,7 +16,7 @@
 </div>
 
 <div class="category my-4">
-    <h4 class="bold-text" style="margin-bottom: 10px">Kategori</h4>
+    <!-- <h4 class="bold-text" style="margin-bottom: 10px">Kategori</h4> -->
     <div class="d-flex flex-wrap justify-content-start" style="margin-left: -50px">
     {{-- @foreach ([
             ['name' => 'MUA', 'image' => 'Beautician.png'],
@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="recommendations my-4">
-    <h4 class="bold-text">Rekomendasi</h4>
+    <h4 class="bold-text" style="text-align: center;">Rekomendasi</h4>
     <div class="d-flex flex-wrap">
         {{-- <div class="card">
             <img style="width: 300px; height:150px" src="{{ asset('images/categories/Beautician.png') }}" class="card-img-top" alt="MUA">
