@@ -31,7 +31,7 @@ Route::post('/administrasi', [App\Http\Controllers\KatalogCustomerController::cl
 Route::get('/dashboard', [App\Http\Controllers\KatalogCustomerController::class, 'dashboard'])->middleware("auth");
 Route::get('/wishlist', [App\Http\Controllers\KatalogCustomerController::class, 'wishlist']);
 
-Route::get('/profilcust', [App\Http\Controllers\KatalogCustomerController::class, 'profilcust']);
+Route::get('/profilcust', [App\Http\Controllers\KatalogCustomerController::class, 'profilcust'])->name('profile');
 Route::get('/review', [App\Http\Controllers\KatalogCustomerController::class, 'review']);
 Route::get('/helpcenter', [App\Http\Controllers\KatalogCustomerController::class, 'helpcenter']);
 Route::get('/notifikasi', [App\Http\Controllers\KatalogCustomerController::class, 'notifikasi']);

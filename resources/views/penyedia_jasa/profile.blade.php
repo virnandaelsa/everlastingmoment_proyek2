@@ -38,12 +38,12 @@
         <img src="{{ asset('images/avatar/3.jpg') }}" alt="User Profile">
     </div>
     <div class="account-details">
-        <p><strong>Nama:</strong> {{ $user->nama }}</p>
-        <p><strong>Username:</strong> {{ $user->username }}</p>
-        <p><strong>Email:</strong> {{ $user->email }}</p>
-        <p><strong>No. Telp:</strong> {{ $user->no_telp }}</p>
-        <p><strong>Alamat:</strong> {{ $user->alamat }}</p>
-        <p><strong>Role:</strong> {{ $user->role == 0 ? 'User' : 'Admin' }}</p>
+        <p><strong>Nama:</strong> {{ $user['nama'] }}</p>
+        <p><strong>Username:</strong> {{ $user['username'] }}</p>
+        <p><strong>Email:</strong> {{ $user['email'] }}</p>
+        <p><strong>No. Telp:</strong> {{ $user['no_telp'] }}</p>
+        <p><strong>Alamat:</strong> {{ $user['alamat'] }}</p>
+        <p><strong>Role:</strong> {{ $user['role'] == 0 ? 'User' : 'Admin' }}</p>
     </div>
 </div>
 @endsection

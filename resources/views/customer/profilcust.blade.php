@@ -83,19 +83,19 @@
             <div class="profile">
                 <img class="profile-pic" src='{{asset("images/avatar/3.jpg")}}' alt="Profile Picture">
                 <div class="user-info">
-                    <div class="username">{{ auth()->user()->username }}</div>
-                    <div class="name">{{ auth()->user()->nama }}</div>
+                    <div class="username">{{ $user['username'] }}</div>
+                    <div class="name">{{ $user['nama'] }}</div>
                 </div>
             </div>
         </div>
         <div class="info"> <!-- Perbaiki kesalahan penulisan class -->
             <ul>
                 <li><a href="/account">Informasi Akun</a></li>
-                @if (auth()->user()->role == 0)
+                @if ($user['role'] == 0)
                     <li><a href="/status_pemesanan">Pesanan Saya</a></li>
                     <li><a href="/wishlist">Wishlist</a></li>
                     <li><a href="/administrasi">Daftar Sebagai Penyedia Jasa</a></li>
-                @elseif (auth()->user()->role == 1)
+                @elseif ($user['role'] == 1)
                 <li><a href="/datapesanan">Data Pemesanan</a></li>
                     <li><a href="/tambah_katalog">Tambah Katalog</a></li>
                     <li><a href="/">Katalog Saya</a></li>
