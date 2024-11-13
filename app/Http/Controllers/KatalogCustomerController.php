@@ -84,6 +84,7 @@ class KatalogCustomerController extends Controller
         $response = $client->request('GET', 'http://127.0.0.1:8000/api/lihat-jasa/' . $id, [
             'headers' => [
                 'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . session("token")
             ]
         ]);
 
@@ -91,10 +92,12 @@ class KatalogCustomerController extends Controller
 
         $data1 = $semuaData["data"]["detail_katalog"];
         $data2 = $semuaData["data"]["detail_penjual"];
+        $data3 = $semuaData["data"]["role"];
 
         return view('customer.lihatjasa', [
             'data1' => $data1,
             'data2' => $data2,
+            'role'  => $data3
         ]);
 
     }

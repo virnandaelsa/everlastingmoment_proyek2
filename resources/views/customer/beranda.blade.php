@@ -198,49 +198,41 @@
 
     </style>
 </head>
-    <div class="content">
-        @if (session('success'))
-            <div class="alert alert-success" role="alert">
-                {{session('success')}}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <i class="material-icons">close</i>
-              </button>
-            </div>
-        @endif
-        <div class="top-bar">
-            <div class="search-bar">
-                <input type="text" placeholder="Jasa Make Up Pengantin">
-                @auth
-                @else
-                <a href="/registrasi" class="btn-signup">SIGN UP</a>
-                <a href="/login" class="btn-signin">SIGN IN</a>
-                @endauth
-                <button onclick="showPopup()">
-                    <img src="{{ asset('images/filter.png') }}" alt="Gambar Tombol">
-                </button>
-            </div>
+<div class="container-fluid">
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{session('success')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">Close</i>
+            </button>
         </div>
-        {{-- @auth
-            @if (auth()->user()->role==1) --}}
-            @if($role==1)
-                @include('customer.beranda.pjBeranda')
+    @endif
+    <div class="top-bar">
+        <div class="search-bar">
+            <input type="text" placeholder="Cari disini .....">
+            @if(is_null($role))
+                <a href="/registrasi" class="btn-signup" style="margin-left: -20px">SIGN UP</a>
+                <a href="/login" class="btn-signin">SIGN IN</a>
             @endif
-            {{-- @endif
-        @endauth --}}
-        {{-- @auth
-            @if (auth()->user()->role==0) --}}
-            @if($role==0)
-                @include('customer.beranda.isiBeranda')
-            @endif
-            {{-- @endif
-        @endauth --}}
-        {{-- @guest --}}
-        @if($role != 1 && $role != 0)
-            @include('customer.beranda.isiBeranda')
-        @endif
-        {{-- @endguest --}}
+            <button onclick="showPopup()" style="margin-right: 60px; border-radius: 10%">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="35" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                    <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </button>
+        </div>
     </div>
-{{-- </div> --}}
+    @if($role==1)
+        @include('customer.beranda.pjBeranda')
+    @endif
+
+    @if($role==0)
+        @include('customer.beranda.isiBeranda')
+    @endif
+
+    @if($role != 1 && $role != 0)
+        @include('customer.beranda.isiBeranda')
+    @endif
+</div>
 
 <div class="overlay" id="filterPopup">
     <div class="popup">

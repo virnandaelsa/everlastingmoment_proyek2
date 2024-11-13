@@ -16,8 +16,8 @@
 </div>
 
 <div class="category my-4">
-    <h4 class="bold-text">Kategori</h4>
-    <div class="d-flex flex-wrap justify-content-start">
+    <h4 class="bold-text" style="margin-bottom: 10px">Kategori</h4>
+    <div class="d-flex flex-wrap justify-content-start" style="margin-left: -50px">
     {{-- @foreach ([
             ['name' => 'MUA', 'image' => 'Beautician.png'],
             ['name' => 'Dekorasi', 'image' => 'Beautiful Wedding Ribbon.png'],
