@@ -53,6 +53,7 @@ class KatalogCustomerController extends Controller
         $data1 = [];
         $data2 = $semuaData["data"]["detail_katalog"];
         $role  = $semuaData["data"]["role"];
+        $user  = $semuaData["data"]["user"];
 
         if ($role == 1) {
             $data1 = $semuaData["data"]["penjual"];
@@ -62,7 +63,8 @@ class KatalogCustomerController extends Controller
             'data'  => $data,
             'data1' => $data1,
             'data2' => $data2,
-            'role'  => $role
+            'role'  => $role,
+            'user'  => $user
         ]);
 
     }
@@ -93,11 +95,13 @@ class KatalogCustomerController extends Controller
         $data1 = $semuaData["data"]["detail_katalog"];
         $data2 = $semuaData["data"]["detail_penjual"];
         $data3 = $semuaData["data"]["role"];
+        $data4 = $semuaData["data"]["user"];
 
         return view('customer.lihatjasa', [
             'data1' => $data1,
             'data2' => $data2,
-            'role'  => $data3
+            'role'  => $data3,
+            'user'  => $data4
         ]);
 
     }

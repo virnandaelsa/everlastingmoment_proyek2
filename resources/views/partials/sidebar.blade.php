@@ -87,17 +87,19 @@
 
         @if($role == 0 || $role == 1)
         <div class="navbar-nav d-flex flex-row align-items-center small-padding">
-            <a class="nav-link" href="/">Home</a>
+            <div class="navbar-nav" style="margin-right: 200px">
+                <a class="nav-link" href="/">Home</a>
 
-            @if($role == 1)
-                {{-- Navbar link for service providers --}}
-                <a class="nav-link" href="/datapesanan">Pesanan</a>
-            @else
-                {{-- Navbar link for regular customers --}}
-                <a class="nav-link" href="/status_pemesanan">Pesanan</a>
-            @endif
+                @if($role == 1)
+                    {{-- Navbar link for service providers --}}
+                    <a class="nav-link" href="/datapesanan">Pesanan</a>
+                @else
+                    {{-- Navbar link for regular customers --}}
+                    <a class="nav-link" href="/status_pemesanan">Pesanan</a>
+                @endif
 
-            <a class="nav-link" href="/profilcust">Profil</a>
+                <a class="nav-link" href="/profilcust">Profil</a>
+            </div>
 
             <div class="top-bar">
                 <div class="search-bar">
@@ -105,30 +107,35 @@
                 </div>
             </div>
 
+            @php
+                $fotoPath = "http://127.0.0.1:8000/images/foto_users/" . $user['foto'];
+            @endphp
+
             <!-- menampilkan foto profill belum api  -->
-        @auth
-            <li>
-                <a href="{{ route('profile') }}" class="profile-link">
-                    <img src="{{ Auth::user()->photo ? asset('storage/' . Auth::user()->photo) : asset('images/default-avatar.png') }}" 
-                         alt="Profile" class="profile-photo">
-                </a>
-            </li>
-        @endauth
-
-
+            @isset($user)
+                <li>
+                    <a href="{{ route('profile') }}" class="profile-link">
+                        @if (isset($user['foto']))
+                            <img src="{{ $fotoPath }}" alt="Profile" class="profile-photo">
+                        @else
+                            <img src="{{ asset('images/avatar/3.jpg') }}" alt="Profile" class="profile-photo">
+                        @endif
+                    </a>
+                </li>
+            @endisset
         </div>
         @else
 
         {{-- Display this if user is not authenticated --}}
         <span class="navbar-text ms-auto">Silakan login untuk melihat menu.</span>
 
-            {{-- Display this if user is not authenticated --}}
-            <!-- ini belum di filter role nya -->
-            @auth
-                    @else
-                        <a href="/registrasi" class="btn-signup">SIGN UP</a>
-                        <a href="/login" class="btn-signin">SIGN IN</a>
-                    @endauth
+        {{-- Display this if user is not authenticated --}}
+        <!-- ini belum di filter role nya -->
+        @auth
+        @else
+        <a href="/registrasi" class="btn-signup">SIGN UP</a>
+        <a href="/login" class="btn-signin">SIGN IN</a>
+        @endauth
 
         @endif
     </div>
