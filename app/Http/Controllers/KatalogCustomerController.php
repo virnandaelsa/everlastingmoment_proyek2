@@ -552,7 +552,21 @@ class KatalogCustomerController extends Controller
 
     public function profilcust()
     {
-        return view('customer.profilcust');
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/profile', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . session("token")
+            ]
+        ]);
+
+        $semuaData = json_decode($response->getBody()->getContents(), true);
+
+        return view('customer.profilcust', [
+            'user' => $semuaData["data"]['profile'],
+            'role' => $semuaData["data"]['profile']['role']
+        ]);
     }
 
     public function datapesanan()
@@ -594,8 +608,21 @@ class KatalogCustomerController extends Controller
 
     public function info_akun()
     {
-        $user = Auth::user();
-        return view('penyedia_jasa.profile', compact('user'));
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/account', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . session("token")
+            ]
+        ]);
+
+        $semuaData = json_decode($response->getBody()->getContents(), true);
+
+        return view('penyedia_jasa.profile', [
+            'user' => $semuaData["data"]['account'],
+            'role' => $semuaData["data"]['account']['role']
+        ]);
     }
 }
 
