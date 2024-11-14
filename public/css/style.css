@@ -37,7 +37,7 @@ body {
 .content {
     margin-left: 100px;
     padding: 20px;
-    background: #dae3e9; /* Gradient background for main content */
+    background: #F3F5F9; /* Gradient background for main content */
     min-height: 100vh;
     border-radius: 10px;
 }

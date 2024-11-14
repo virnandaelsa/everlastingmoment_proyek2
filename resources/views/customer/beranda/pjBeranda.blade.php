@@ -63,6 +63,8 @@
         justify-content: center;
     }
 
+    
+
     button.btn-primary:hover {
         background-color: #2c4765; /* Warna latar tombol saat dihover */
     }
@@ -90,7 +92,7 @@
     {{-- @auth @if (auth()->user()->role==1) --}}
     @if($role==1)
     <h4 class="bold-text">Tambah Katalog Anda Sekarang!</h4>
-    <a href="/tambah_katalog" class="btn btn-primary">TAMBAH KATALOG</a>
+    <button class="btn btn-primary" onclick="window.location.href='/tambah_katalog'">Tambah Katalog</button>
     @endif
     {{-- @endif @endauth --}}
 </div>
@@ -99,7 +101,7 @@
     <div class="left">
         <h1 class="judul">Everlasting Moments</h1>
         <p class="description">BUAT PERNIKAHAN IMPIAN ANDA MENJADI KENYATAAN</p>
-        <button class="btn btn-primary">Tambah Katalog</button>
+        <button class="btn btn-primary" onclick="window.location.href='/tambah_katalog'">Tambah Katalog</button>
     </div>
     <div class="right">
         <!-- Carousel Bootstrap -->
@@ -137,7 +139,7 @@
 <div class="recommendations my-4">
     <div class="header-row">
         <h6 class="bold-text">KATALOG SAYA</h6>
-        <a href="/tambah_katalog" class="btn btn-primary">TAMBAH KATALOG</a>
+        <button class="btn btn-primary" onclick="window.location.href='/tambah_katalog'">Tambah Katalog</button>
     </div>
     <div class="d-flex flex-wrap">
     @foreach($data1 as $katalog)
