@@ -77,33 +77,6 @@
     </div> --}}
 </div>
 
-<div class="category my-4">
-    <!-- <h4 class="bold-text" style="margin-bottom: 10px">Kategori</h4> -->
-    <div class="d-flex flex-wrap justify-content-start" style="margin-left: -50px">
-    {{-- @foreach ([
-            ['name' => 'MUA', 'image' => 'Beautician.png'],
-            ['name' => 'Dekorasi', 'image' => 'Beautiful Wedding Ribbon.png'],
-            ['name' => 'Sound Systems', 'image' => 'Subwoofer.png'],
-            ['name' => 'Cathering', 'image' => 'Buffet Breakfast.png'],
-            ['name' => 'Wedding Organizer', 'image' => 'Tasklist.png'],
-            ['name' => 'Photography', 'image' => 'SLR Camera.png'],
-            ['name' => 'Undangan', 'image' => 'Letter.png'],
-            ['name' => 'Souvenir', 'image' => 'Favorite Package.png']
-        ] as $category) --}}
-        @foreach ($data as $category)
-        <div class="category-item p-2">
-                <div class="text-center">
-                    <img class="category-icon" src="{{ asset('images/categories/' . $category['gambar_kategori']) }}" alt="{{ $category['judul_kategori'] }}">
-                    {{-- <!-- <img class="category-icon" src="{{ asset('images/categories/' . $category['image']) }}" alt="{{ $category['name'] }}"> --> --}}
-                </div>
-                <p>{{ $category['judul_kategori'] }}</p>
-                {{-- <!-- <p>{{ $category['name'] }}</p> --> --}}
-            </div>
-        @endforeach
-    {{-- @endforeach --}}
-    </div>
-</div>
-
 <div class="container">
     <div class="left">
         <h1 class="judul">Everlasting Moments</h1>
@@ -139,6 +112,35 @@
         </div>
     </div>
 </div>
+
+
+<div class="category my-4">
+    <h4 class="bold-text" style="margin-bottom: 10px margin-left: 50px">Kategori</h4>
+    <div class="d-flex flex-wrap justify-content-start" style="margin-left: 50px">
+    {{-- @foreach ([
+            ['name' => 'MUA', 'image' => 'Beautician.png'],
+            ['name' => 'Dekorasi', 'image' => 'Beautiful Wedding Ribbon.png'],
+            ['name' => 'Sound Systems', 'image' => 'Subwoofer.png'],
+            ['name' => 'Cathering', 'image' => 'Buffet Breakfast.png'],
+            ['name' => 'Wedding Organizer', 'image' => 'Tasklist.png'],
+            ['name' => 'Photography', 'image' => 'SLR Camera.png'],
+            ['name' => 'Undangan', 'image' => 'Letter.png'],
+            ['name' => 'Souvenir', 'image' => 'Favorite Package.png']
+        ] as $category) --}}
+        @foreach ($data as $category)
+        <div class="category-item p-2">
+                <div class="text-center">
+                    <img class="category-icon" src="{{ asset('images/categories/' . $category['gambar_kategori']) }}" alt="{{ $category['judul_kategori'] }}">
+                    {{-- <!-- <img class="category-icon" src="{{ asset('images/categories/' . $category['image']) }}" alt="{{ $category['name'] }}"> --> --}}
+                </div>
+                <p>{{ $category['judul_kategori'] }}</p>
+                {{-- <!-- <p>{{ $category['name'] }}</p> --> --}}
+            </div>
+        @endforeach
+    {{-- @endforeach --}}
+    </div>
+</div>
+
 
 
 <div class="recommendations my-4">
