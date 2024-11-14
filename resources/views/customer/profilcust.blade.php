@@ -57,10 +57,12 @@
     }
 
     .profile-pic {
-        width: 50px; /* Adjust the size as needed */
-        height: 50px; /* Adjust the size as needed */
-        border-radius: 50%; /* Makes the image circular */
-        margin-right: 10px; /* Space between image and user info */
+        width: 120px; /* Sesuaikan ukuran */
+        height: 120px; /* Pastikan tinggi dan lebar sama untuk bentuk lingkaran */
+        border-radius: 50%; /* Membuat gambar menjadi lingkaran */
+        object-fit: cover; /* Memastikan gambar memenuhi lingkaran tanpa terdistorsi */
+        border: 2px solid #365B80; /* Border opsional */
+        margin-left: 40px;
     }
 
     .user-info {
@@ -69,12 +71,40 @@
     }
 
     .username, .name {
-        /* Add additional styling for username and name if needed */
+        margin-left: 20px;
+    }
+    .username{
+        font-size: 25px;
+        font-weight: 500;
+    }
+    .name{
+        font-size: 26px;
+        font-style: italic;
     }
 
     .info {
-    margin-top: 50px; /* Mengatur margin atas */
-}
+        margin-top: 30px; /* Mengatur margin atas */
+        margin-left: 30px;
+        width: 1230px;
+    }
+
+    .info ul {
+        list-style-type: none; /* Menghilangkan bullet points pada list */
+        padding: 0; /* Menghilangkan padding default pada list */
+        margin: 0; /* Menghilangkan margin default pada list */
+    }
+
+    .info ul li {
+        font-size: 18px; /* Memperbesar ukuran teks */
+        border-bottom: 2px solid #ccc; /* Garis bawah pada setiap item */
+        padding: 12px 0; /* Jarak antara teks dan garis bawah */
+        width: 100%; /* Menjadikan item selebar card */
+        margin-bottom: 8px; /* Jarak antar item */
+    }
+
+    .info ul li:last-child {
+        border-bottom: none; /* Menghapus garis bawah pada item terakhir */
+    }
 </style>
 
 <div class="content">
