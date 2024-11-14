@@ -7,7 +7,7 @@
 
     .container {
       display: flex;
-      height: 50vh;
+      height: 100%;
       width: 100%;
     }
 
@@ -15,8 +15,9 @@
 
     .right {
       width: 50%;
-      background-color: #e0e0e0;
-      padding: 10px 30px ;
+      height: 100%;
+      background-color: #988D8F;
+      padding: 20px 60px ;
     }
 
     img {
@@ -26,35 +27,34 @@
     }
 
     .left {
-        background-color: #f5f5f5;
+        background-color: #CFCDD4;
         width: 50%;
         padding: 50px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: flex-start; /* Menyelaraskan konten ke kiri */
-        text-align: left; /* Memastikan teks diratakan ke kiri */
-        gap: 20px; /* Menambahkan jarak antar elemen */
+        justify-content: center; /* Menyelaraskan konten di tengah vertikal */
+        align-items: center; /* Menyelaraskan konten di tengah horizontal */
+        text-align: center; /* Teks diratakan ke tengah */
     }
 
-    .title {
+
+    .judul {
         font-size: 20px; /* Ukuran font besar untuk judul */
         font-weight: bold; /* Menebalkan teks judul */
-        margin-bottom: 20px; /* Jarak bawah */
+        margin-bottom: 10px; /* Jarak bawah */
         color: #333; /* Warna teks */
         justify-content: center;
     }
 
     .description {
         font-size: 18px;
-        margin-bottom: 30px; /* Jarak bawah */
+        margin-bottom: 10px; /* Jarak bawah */
         color: #666; /* Warna teks lebih terang */
         justify-content: center;
     }
 
     button.btn-primary {
         font-size: 16px; /* Ukuran font tombol */
-        padding: 12px 24px; /* Menambahkan padding di tombol */
         border-radius: 8px; /* Membuat sudut tombol lebih melengkung */
         background-color: #365B80; /* Warna latar tombol */
         color: white; /* Warna teks tombol */
@@ -75,14 +75,14 @@
     }
 
     .bold-text {
-        margin: 0; /* Remove any margin to keep it flush with the left */
+        margin-left: 30px; /* Remove any margin to keep it flush with the left */
     }
 
     .btn-primary {
         background-color: #365B80; /* Set the background color (green) */
         color: white; /* Set the text color */
         border-color: #365B80; /* Set the border color to match the background */
-        margin: 20px;
+        margin-left: 30px;
     }
 
 </style>
@@ -97,14 +97,40 @@
 
 <div class="container">
     <div class="left">
-      <h1 class="title"  >Everlasting Moments</h1>
-      <p class="description">BUAT PERNIKAHAN IMPIAN ANDA MENJADI KENYATAAN</p>
-      <button class="btn btn-primary">Tambah Katalog</button>
+        <h1 class="judul">Everlasting Moments</h1>
+        <p class="description">BUAT PERNIKAHAN IMPIAN ANDA MENJADI KENYATAAN</p>
+        <button class="btn btn-primary">Tambah Katalog</button>
     </div>
     <div class="right">
-        <img src="{{ asset('images/wedding dekor.jpeg') }}" alt="Wedding photo">
+        <!-- Carousel Bootstrap -->
+        <div id="weddingCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <img src="{{ asset('images/wedding dekor.jpg') }}" class="d-block w-100" alt="Wedding Dekor 1">
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <img src="{{ asset('images/wedding dekor 2.jpg') }}" class="d-block w-100" alt="Wedding Dekor 2">
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <img src="{{ asset('images/wedding dekor 3.jpg') }}" class="d-block w-100" alt="Wedding Dekor 3">
+                </div>
+            </div>
+            <!-- Kontrol Carousel -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#weddingCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#weddingCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
-  </div>
+</div>
+
 
 {{-- @auth @if (auth()->user()->role==1) --}}
 @if($role==1)
@@ -177,3 +203,6 @@
 </div> -->
 @endif
 {{-- @endif @endauth --}}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

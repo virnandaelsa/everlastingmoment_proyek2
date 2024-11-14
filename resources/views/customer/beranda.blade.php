@@ -30,7 +30,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: #F3F5F9;
             display: none;
             justify-content: right;
             align-items: right;

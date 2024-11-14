@@ -24,6 +24,7 @@
 
         .navbar-nav .nav-link {
             margin-left: 10px; /* Menambahkan spasi antar link navbar */
+            font-weight: bold; /* Membuat teks menjadi tebal */
         }
 
         .search-bar input {
@@ -32,7 +33,7 @@
             border-radius: 4px; /* Rounded corners */
             border: 1px solid #ccc; /* Border color */
             font-size: 16px; /* Adjust the font size inside the input */
-            min-width: 1000px; /* Set a specific width (optional) */
+            min-width: 700px; /* Set a specific width (optional) */
         }
 
 

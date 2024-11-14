@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #dae3e9; /* Gradient background */
+    background: #F3F5F9; /* Gradient background */
 }
 
 .sidebar {
@@ -161,9 +161,10 @@ body {
 }
 
 .card {
-    border: 1px solid #ddd;
+    border: 1px solid #cecdcd;
     border-radius: 5px;
     overflow: hidden;
+    margin-left: 50px;
 }
 
 .card img {
