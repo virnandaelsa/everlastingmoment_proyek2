@@ -1,65 +1,110 @@
 <style>
-    .container {
-      display: flex;
-      height: 100%;
-      width: 100%;
+    body, html {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
 
-    .right {
-      width: 50%;
-      height: 100%;
-      background-color: #988D8F;
-      padding: 20px 60px ;
+    /* Full-width Banner */
+    .banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100vw; /* Lebar penuh layar */
+        height: 500px; /* Sesuaikan tinggi dengan desain */
+        background-color: #d3cfcf; /* Warna background utama */
+        position: relative;
     }
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .left {
-        background-color: #CFCDD4;
+    /* Bagian Kiri */
+    .banner .left {
         width: 50%;
-        padding: 50px;
+        padding: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Menyelaraskan konten di tengah vertikal */
-        align-items: center; /* Menyelaraskan konten di tengah horizontal */
-        text-align: center; /* Teks diratakan ke tengah */
+        justify-content: center; /* Vertically center the content */
+        align-items: center; /* Horizontally center the content */
+        color: #333;
+        position: relative;
+        z-index: 1;
+        text-align: center; /* Ensure the text is centered */
     }
 
+    .banner .judul {
+        font-family: 'Georgia', serif;
+        font-size: 2.5rem;
+        color: #000;
+    }
 
-    .judul {
-        font-size: 20px; /* Ukuran font besar untuk judul */
-        font-weight: bold; /* Menebalkan teks judul */
-        margin-bottom: 10px; /* Jarak bawah */
-        color: #333; /* Warna teks */
+    .banner .description {
+        font-family: 'Arial', sans-serif;
+        font-size: 1.2rem;
+        color: #000;
+    }
+
+    .banner .btn-primary {
+        font-size: 16px;
+        border-radius: 10px;
+        background-color: #1F4E79;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .banner .btn-primary:hover {
+        background-color: #163B5C;
+    }
+
+    /* Bagian Kanan dengan Carousel */
+    .banner .right {
+        width: 50%; /* Setengah bagian dari banner */
+        height: 100%;
+        position: relative;
+        background-color: #988D8F; /* Warna background di belakang carousel */
+        display: flex;
         justify-content: center;
+        align-items: center;
     }
 
-    .description {
-        font-size: 18px;
-        margin-bottom: 10px; /* Jarak bawah */
-        color: #666; /* Warna teks lebih terang */
+    .banner .carousel-inner img {
+        max-width: 80%; /* Ukuran gambar diperkecil */
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: block; /* Pastikan gambar tidak melampaui container */
+        margin: 0 auto;
+    }
+
+
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%; /* Circular buttons */
+        padding: 10px; /* Increase padding for larger buttons */
+        width: 40px; /* Size of the icon button */
+        height: 40px; /* Size of the icon button */
+        display: flex;
         justify-content: center;
+        align-items: center;
+        border: 2px solid rgba(0, 0, 0, 0.5); /* Optional border for visibility */
     }
 
-    button.btn-primary {
-        font-size: 16px; /* Ukuran font tombol */
-        border-radius: 8px; /* Membuat sudut tombol lebih melengkung */
-        background-color: #365B80; /* Warna latar tombol */
-        color: white; /* Warna teks tombol */
-        cursor: pointer; /* Mengubah kursor ketika tombol dihover */
-        transition: background-color 0.3s ease; /* Efek transisi ketika tombol dihover */
-        justify-content: center;
-    }
-
-    button.btn-primary:hover {
-        background-color: #2c4765; /* Warna latar tombol saat dihover */
+    @media (max-width: 768px) {
+        .banner {
+            flex-direction: column;
+            height: auto;
+        }
+        .banner .left, .banner .right {
+            width: 100%;
+        }
+        .banner .carousel-inner img {
+            width: 90%;
+        }
     }
 
 </style>
+
 <div class="penawaran my-4">
     {{-- <h4 class="bold-text">Penawaran hari Ini!!!</h4>
     <p>Diskon 50%</p> --}}
@@ -77,30 +122,25 @@
     </div> --}}
 </div>
 
-<div class="container">
+<div class="banner">
     <div class="left">
         <h1 class="judul">Everlasting Moments</h1>
         <p class="description">BUAT PERNIKAHAN IMPIAN ANDA MENJADI KENYATAAN</p>
         <button class="btn btn-primary">Tambah Katalog</button>
     </div>
     <div class="right">
-        <!-- Carousel Bootstrap -->
         <div id="weddingCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <!-- Slide 1 -->
                 <div class="carousel-item active">
                     <img src="{{ asset('images/wedding dekor.jpg') }}" class="d-block w-100" alt="Wedding Dekor 1">
                 </div>
-                <!-- Slide 2 -->
                 <div class="carousel-item">
                     <img src="{{ asset('images/wedding dekor 2.jpg') }}" class="d-block w-100" alt="Wedding Dekor 2">
                 </div>
-                <!-- Slide 3 -->
                 <div class="carousel-item">
                     <img src="{{ asset('images/wedding dekor 3.jpg') }}" class="d-block w-100" alt="Wedding Dekor 3">
                 </div>
             </div>
-            <!-- Kontrol Carousel -->
             <button class="carousel-control-prev" type="button" data-bs-target="#weddingCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
