@@ -3,6 +3,7 @@
       display: flex;
       height: 100%;
       width: 100%;
+      padding: 0;
     }
 
     .right {
@@ -115,8 +116,8 @@
 
 
 <div class="category my-4">
-    <h4 class="bold-text" style="margin-bottom: 10px margin-left: 50px">Kategori</h4>
-    <div class="d-flex flex-wrap justify-content-start" style="margin-left: 50px">
+    <h4 class="bold-text" style="margin-bottom: 10px; margin-left: 50px">Kategori</h4>
+    <div class="d-flex flex-wrap justify-content-start">
     {{-- @foreach ([
             ['name' => 'MUA', 'image' => 'Beautician.png'],
             ['name' => 'Dekorasi', 'image' => 'Beautiful Wedding Ribbon.png'],
@@ -144,7 +145,7 @@
 
 
 <div class="recommendations my-4">
-    <h4 class="bold-text" style="text-align: center;">Rekomendasi</h4>
+    <h4 class="bold-text" style="margin-left: 50px">Rekomendasi</h4>
     <div class="d-flex flex-wrap">
         {{-- <div class="card">
             <img style="width: 300px; height:150px" src="{{ asset('images/categories/Beautician.png') }}" class="card-img-top" alt="MUA">

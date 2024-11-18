@@ -18,7 +18,7 @@
 </head>
 <body>
     @include('partials.sidebar')
-    <!-- <div class="container-fluid" style="padding-left: 80px"> -->
+    <div class="container-fluid">
         @yield('content')
     </div>
 </body>

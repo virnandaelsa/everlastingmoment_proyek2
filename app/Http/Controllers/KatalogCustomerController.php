@@ -45,6 +45,7 @@ class KatalogCustomerController extends Controller
                 'Authorization' => 'Bearer ' . session("token")
             ]
         ]);
+        // dd(session("token"));
 
         $semuaData = json_decode($response->getBody()->getContents(), true);
         // dd($semuaData);
@@ -53,11 +54,10 @@ class KatalogCustomerController extends Controller
         $data1 = [];
         $data2 = $semuaData["data"]["detail_katalog"];
         $role  = $semuaData["data"]["role"];
-        $user  = $semuaData["data"]["user"];
-
         if ($role == 1) {
             $data1 = $semuaData["data"]["penjual"];
         }
+        $user  = $semuaData["data"]["user"];
 
         return view('customer.beranda', [
             'data'  => $data,

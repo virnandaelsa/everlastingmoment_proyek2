@@ -2,7 +2,7 @@
 
 @section('content')
         <div class="main-content">
-        <div class="top-bar">
+        {{-- <div class="top-bar">
             <div class="search-bar">
                 <input type="text" placeholder="Jasa Make Up Pengantin">
                 @auth
@@ -11,7 +11,7 @@
                 <a href="/login" class="btn-signin">SIGN IN</a>
                 @endauth
             </div>
-        </div>
+        </div> --}}
             <div class="package col-lg-12 col-sm-8">
             <div class="package row">
             <div class="col-md-6">

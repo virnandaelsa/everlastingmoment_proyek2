@@ -104,7 +104,7 @@ class AuthLoginController extends Controller
             $responseBody = json_decode($response->getBody(), true);
 
             if ($responseBody["status"] == true) {
-                session(["token" => $responseBody["token"]]);
+                session(['token' => $responseBody['token']]);
             }
 
             return redirect('/', );
