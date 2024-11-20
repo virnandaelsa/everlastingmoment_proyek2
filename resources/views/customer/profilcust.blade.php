@@ -42,7 +42,7 @@
     }
 
     .profile-info a:hover {
-        color: #666; /* Gray color on hover */
+        color: #365B80; /* Gray color on hover */
     }
 
     .pro {
