@@ -107,13 +107,29 @@ class KatalogCustomerController extends Controller
     }
     public function pesan($id)
     {
-        $data1 = dt_katalog::with('katalog')->find($id);
-        $data2 = dt_katalog::with('katalog.detailPJ.pengguna')->find($id);
-        // dd($data2);
+        // $data1 = dt_katalog::with('katalog')->find($id);
+        // $data2 = dt_katalog::with('katalog.detailPJ.pengguna')->find($id);
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/pesan/' . $id, [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . session("token")
+            ]
+        ]);
+
+        $semuaData = json_decode($response->getBody()->getContents(), true);
+
+        $data1 = $semuaData["data"]["katalog"];
+        $data2 = $semuaData["data"]["detail_penjual"];
+        $data3 = $semuaData["data"]["user"];
+
         return view('customer.pesan',
             [
             'data1' => $data1,
             'data2' => $data2,
+            'user'  => $data3
             ]
         );
     }
@@ -545,6 +561,7 @@ class KatalogCustomerController extends Controller
     {
         return view('penyedia_jasa.lengkapi_administrasi');
     }
+
     public function pemesanan($id)
     {
         $data = transaksi::with('pengguna', 'katalog.detailPJ', 'katalog.dt_katalog','dt_transaksi')->where('id_transaksi',$id)->get();

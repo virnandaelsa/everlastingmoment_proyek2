@@ -11,7 +11,7 @@
       width: 100%;
     }
 
-    
+
 
     .right {
       width: 50%;
@@ -63,7 +63,7 @@
         justify-content: center;
     }
 
-    
+
 
     button.btn-primary:hover {
         background-color: #2c4765; /* Warna latar tombol saat dihover */
@@ -145,20 +145,23 @@
     @foreach($data1 as $katalog)
         <div class="card">
             <?php
-                if (isset($katalog->dt_katalog[0]->gambar)) {
-                    $gambar = $katalog->dt_katalog[0]->gambar;
+                if (isset($katalog['detail_katalog'][0]['gambar'])) {
+                    # code...
+                    $gambar = $katalog['detail_katalog'][0]['gambar'];
                 }
                 else {
                     $gambar=asset("images/logoevmo.png");
                 }
-                if (isset($katalog->dt_katalog[0]->harga)) {
-                    $harga = $katalog->dt_katalog[0]->harga;
+                if (isset($katalog['detail_katalog'][0]['harga'])) {
+                    # code...
+                    $harga = $katalog['detail_katalog'][0]['harga'];
                 }
                 else {
+                    # code...
                     $harga='';
                 }
             ?>
-            <img src="{{filter_var(asset("images/catalogs/$gambar"), FILTER_VALIDATE_URL)}}" onerror="this.onerror=null; this.src='{{ $gambar }}';"
+            <img src="{{'http://127.0.0.1:8000/images/gambar_detail_katalog/'. $gambar}}" onerror="this.onerror=null; this.src='{{ $gambar }}';"
                 class="card-img-top" alt="{{$gambar}}" style="width: 300px; height:150px">
             <div class="card-body">
                 <h5 class="card-title">{{$katalog['judul']}}</h5>

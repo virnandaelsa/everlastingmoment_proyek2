@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\KatalogCustomerController::class, 'index']);
 Route::get('/lihatjasa/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'lihatjasa'])->name("lihatjasa");
-Route::get('/pesan/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'pesan'])->middleware("auth");
-Route::post('/pesan', [App\Http\Controllers\KatalogCustomerController::class, 'store_pesan'])->name('pesan.store')->middleware("auth");
+Route::get('/pesan/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'pesan'])->name('pesan');
+Route::post('/pesan', [App\Http\Controllers\KatalogCustomerController::class, 'store_pesan'])->name('pesan.store');
 Route::get('/tambah_katalog', [App\Http\Controllers\KatalogCustomerController::class, 'tambah_katalog'])->name('catalog.create');
 Route::post('/tambah-katalog', [KatalogCustomerController::class, 'store_catalogs'])->name('catalog.store');
 Route::get('/catalog/edit/{id}', [KatalogCustomerController::class, 'edit_catalog'])->name('catalog.edit');
@@ -41,7 +41,7 @@ Route::get('/pemesanan/{id}', [App\Http\Controllers\KatalogCustomerController::c
 
 Route::get('/account', [KatalogCustomerController::class, 'info_akun'])->name('account');
 
-Route::get('/pesan/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'pesan'])->middleware("auth");
+// Route::get('/pesan/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'pesan'])->middleware("auth");
 Route::post('/pesan/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'store_trx'])->middleware("auth")->name('trx');
 
 

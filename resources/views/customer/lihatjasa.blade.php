@@ -103,7 +103,7 @@
     @else
     <div class="footer">
         <a href="https://wa.me/{{$data2['detail_penjual']['user']['no_telp']}}"><button class="chat">Chat</button></a>
-        <a href="/pesan/{{$url}}"><button class="order">Pesan</button></a>
+        <a href=" {{ route('pesan', $data1['id_katalog']) }} "><button class="order">Pesan</button></a>
     </div>
     @endauth
     </div>
