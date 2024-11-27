@@ -25,7 +25,7 @@ Route::get('/status_pemesanan', [App\Http\Controllers\KatalogCustomerController:
 Route::get('/reviewcustomer', [App\Http\Controllers\KatalogCustomerController::class, 'review_customer']);
 Route::get('/lihatjasa_pj', [App\Http\Controllers\KatalogCustomerController::class, 'lihatjasa_pj'])->name("lihatjasa_pj");
 
-Route::get('/administrasi', [App\Http\Controllers\KatalogCustomerController::class, 'lengkapi_administrasi'])->middleware("auth");
+Route::get('/administrasi', [App\Http\Controllers\KatalogCustomerController::class, 'lengkapi_administrasi'])->name('administrasi');
 Route::post('/administrasi', [App\Http\Controllers\KatalogCustomerController::class, 'store_administrasi'])->name('sfa');
 
 Route::get('/dashboard', [App\Http\Controllers\KatalogCustomerController::class, 'dashboard'])->middleware("auth");
@@ -42,9 +42,7 @@ Route::get('/pemesanan/{id}', [App\Http\Controllers\KatalogCustomerController::c
 Route::get('/account', [KatalogCustomerController::class, 'info_akun'])->name('account');
 
 // Route::get('/pesan/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'pesan'])->middleware("auth");
-Route::post('/pesan/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'store_trx'])->middleware("auth")->name('trx');
-
-
+// Route::post('/pesan/{id}', [App\Http\Controllers\KatalogCustomerController::class, 'store_trx'])->middleware("auth")->name('trx');
 
 // login - regirster
 Route::get('/login', [App\Http\Controllers\KatalogCustomerController::class, 'login'])->middleware("guest")->name('login');

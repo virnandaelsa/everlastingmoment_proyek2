@@ -110,6 +110,8 @@ class KatalogCustomerController extends Controller
         // $data1 = dt_katalog::with('katalog')->find($id);
         // $data2 = dt_katalog::with('katalog.detailPJ.pengguna')->find($id);
 
+        // dd($id);
+
         $client = new \GuzzleHttp\Client();
 
         $response = $client->request('GET', 'http://127.0.0.1:8000/api/pesan/' . $id, [
@@ -120,6 +122,7 @@ class KatalogCustomerController extends Controller
         ]);
 
         $semuaData = json_decode($response->getBody()->getContents(), true);
+        // dd($semuaData);
 
         $data1 = $semuaData["data"]["katalog"];
         $data2 = $semuaData["data"]["detail_penjual"];
@@ -145,31 +148,64 @@ class KatalogCustomerController extends Controller
         // return redirect()->back();
         // dd($request);
             // Menambahkan data ke tabel transaksi dan mendapatkan ID yang baru
-            $transaksiId = DB::table('transaksi')->insertGetId([
-                'id_user' => $request->id_user,
-                'id_katalog' => $request->id_katalog,
-                'tanggal' => $request->tanggal,
-            ]);
+            // $transaksiId = DB::table('transaksi')->insertGetId([
+            //     'id_user' => $request->id_user,
+            //     'id_katalog' => $request->id_katalog,
+            //     'tanggal' => $request->tanggal,
+            // ]);
 
             // Menambahkan data ke tabel detail_transaksi dengan ID dari tabel transaksi
-            DB::table('dt_transaksi')->insert([
-                'id_transaksi' => $transaksiId,
-                'ket' => $request->keterangan,
-                'bukti_tfDP'=>'',
-                'bukti_tfPelunasan'=>'',
-                'status_pembayaran'=>'1'
-            ]);
-        return redirect("/pesan/$request->id_dt_katalog")->with('success', 'Transaksi telah ditambahkan silahkan menunggu konfirmasi penyedia jasa.');
+        //     DB::table('dt_transaksi')->insert([
+        //         'id_transaksi' => $transaksiId,
+        //         'ket' => $request->keterangan,
+        //         'bukti_tfDP'=>'',
+        //         'bukti_tfPelunasan'=>'',
+        //         'status_pembayaran'=>'1'
+        //     ]);
+        // return redirect("/pesan/$request->id_dt_katalog")->with('success', 'Transaksi telah ditambahkan silahkan menunggu konfirmasi penyedia jasa.');
 
         // $data1 = katalog::with('dt_katalog')->find($id);
         // $data2 = katalog::with('detailPJ.pengguna')->find($id);
         // dd($data2);
-        return view('customer.pesan',
+        // return view('customer.pesan',
+        //     [
+        //     'data1' => $data1,
+        //     'data2' => $data2,
+        //     ]
+        // );
+
+        // dd($request->all());
+
+        $client = new \GuzzleHttp\Client();
+
+        $multipartData = [
             [
-            // 'data1' => $data1,
-            // 'data2' => $data2,
+                'name' => 'id_user',
+                'contents' => $request->id_user,
+            ],
+            [
+                'name' => 'id_katalog',
+                'contents' => $request->id_katalog,
+            ],
+            [
+                'name' => 'tanggal',
+                'contents' => $request->tanggal,
+            ],
+            [
+                'name' => 'keterangan',
+                'contents' => $request->keterangan,
             ]
-        );
+        ];
+
+        $response = $client->request('POST', 'http://127.0.0.1:8000/api/pesan/store', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . session("token")
+            ],
+            'multipart' => $multipartData
+        ]);
+
+        return redirect()->route('pesan', ['id' => $request->id_katalog])
+                 ->with('success', 'Transaksi telah ditambahkan, silakan menunggu konfirmasi penyedia jasa.');
     }
     public function dp()
     {
@@ -523,37 +559,113 @@ class KatalogCustomerController extends Controller
         ]);
 
 
-        $administrasi = new detailPJ();
-        $administrasi->id_user = auth()->user()->id_user;
-        $administrasi->nama_toko = $request->namaToko;
-        $administrasi->alamat = $request->alamat . " " . $request->kota . ", " . $request->provinsi;
-        $administrasi->kategori = $request->kategori;
-        $administrasi->bank = $request->namaBank;
-        $administrasi->no_rek = $request->no_rek;
-        $administrasi->profil_tk = $request->fotoProfil;
-        $administrasi->sampul_tk = $request->fotoSampul;
+        // $administrasi = new detailPJ();
+        // $administrasi->id_user = auth()->user()->id_user;
+        // $administrasi->nama_toko = $request->namaToko;
+        // $administrasi->alamat = $request->alamat . " " . $request->kota . ", " . $request->provinsi;
+        // $administrasi->kategori = $request->kategori;
+        // $administrasi->bank = $request->namaBank;
+        // $administrasi->no_rek = $request->no_rek;
+        // $administrasi->profil_tk = $request->fotoProfil;
+        // $administrasi->sampul_tk = $request->fotoSampul;
 
-        if ($request->hasFile("fotoProfil") || $request->hasFile("fotoSampul")) {
-            $image = $request->file("fotoProfil");
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/images/penyedia_jasa/profil');
-            $image->move($destinationPath, $name);
-            $administrasi->profil_tk = $name;
+        // if ($request->hasFile("fotoProfil") || $request->hasFile("fotoSampul")) {
+        //     $image = $request->file("fotoProfil");
+        //     $name = time().'.'.$image->getClientOriginalExtension();
+        //     $destinationPath = public_path('/images/penyedia_jasa/profil');
+        //     $image->move($destinationPath, $name);
+        //     $administrasi->profil_tk = $name;
 
-            $image = $request->file("fotoSampul");
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/images/penyedia_jasa/sampult');
-            $image->move($destinationPath, $name);
-            $administrasi->sampul_tk = $name;
+        //     $image = $request->file("fotoSampul");
+        //     $name = time().'.'.$image->getClientOriginalExtension();
+        //     $destinationPath = public_path('/images/penyedia_jasa/sampult');
+        //     $image->move($destinationPath, $name);
+        //     $administrasi->sampul_tk = $name;
 
+        // }
+
+        // $administrasi->save();
+
+        // $id = auth()->user()->id_user;
+        // DB::update("update pengguna set role = 1 where id_user = $id");
+
+        // return redirect("/")->with('success', 'Berhasil Menjadi Penyedia Jasa.');
+
+        // dd($request->all());
+
+        $client = new \GuzzleHttp\Client();
+
+        $multipartData = [
+            [
+                'name' => 'nama_toko',
+                'contents' => $request->namaToko
+            ],
+            [
+                'name' => 'alamat',
+                'contents' => $request->alamat . " " . $request->kota . ", " . $request->provinsi
+            ],
+            [
+                'name' => 'kategori',
+                'contents' => $request->kategori
+            ],
+            [
+                'name' => 'bank',
+                'contents' => $request->namaBank
+            ],
+            [
+                'name' => 'no_rek',
+                'contents' => $request->no_rek
+            ]
+        ];
+
+        // Cek apakah ada file gambar
+        if ($request->hasFile('fotoProfil')) { //array
+            $image = $request->file('fotoProfil');
+
+            // Pastikan itu adalah instance UploadedFile
+            if ($image instanceof \Illuminate\Http\UploadedFile) {
+                $multipartData[] = [
+                    'name'     => 'fotoProfile',  // Nama field di API
+                    'contents' => fopen($image->getPathname(), 'r'),  // Buka file
+                    'filename' => $image->getClientOriginalName()  // Nama asli file
+                ];
+            } else {
+                return response()->json(['error' => 'File tidak valid'], 400);
+            }
+        } else {
+            return response()->json(['error' => 'Tidak ada file yang diunggah'], 400);
         }
 
-        $administrasi->save();
+        if ($request->hasFile('fotoSampul')) { //array
+            $image = $request->file('fotoSampul');
 
-        $id = auth()->user()->id_user;
-        DB::update("update pengguna set role = 1 where id_user = $id");
+            // Pastikan itu adalah instance UploadedFile
+            if ($image instanceof \Illuminate\Http\UploadedFile) {
+                $multipartData[] = [
+                    'name'     => 'fotoSampul',  // Nama field di API
+                    'contents' => fopen($image->getPathname(), 'r'),  // Buka file
+                    'filename' => $image->getClientOriginalName()  // Nama asli file
+                ];
+            } else {
+                return response()->json(['error' => 'File tidak valid'], 400);
+            }
+        } else {
+            return response()->json(['error' => 'Tidak ada file yang diunggah'], 400);
+        }
 
-        return redirect("/")->with('success', 'Berhasil Menjadi Penyedia Jasa.');
+        try {
+            $response = $client->request('POST', 'http://127.0.0.1:8000/api/penyedia_jasa/store', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . session("token")
+                ],
+                'multipart' => $multipartData
+            ]);
+
+            return redirect("/")->with('success', 'Berhasil Menjadi Penyedia Jasa.');
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
     }
 
 

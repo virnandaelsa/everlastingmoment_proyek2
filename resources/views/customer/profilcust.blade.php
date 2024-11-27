@@ -111,7 +111,14 @@
     <div class="profile-info">
         <div class="pro">
             <div class="profile">
-                <img class="profile-pic" src='{{asset("images/avatar/3.jpg")}}' alt="Profile Picture">
+                @php
+                    $fotoPath = "http://127.0.0.1:8000/images/foto_users/" . $user['foto'];
+                @endphp
+                @if (isset($user['foto']))
+                    <img class="profile-pic" src='{{$fotoPath}}' alt="Profile Picture">
+                @else
+                    <img src="{{ asset('images/avatar/3.jpg') }}" alt="Profile" class="profile-pic">
+                @endif
                 <div class="user-info">
                     <div class="username">{{ $user['username'] }}</div>
                     <div class="name">{{ $user['nama'] }}</div>
@@ -124,7 +131,7 @@
                 @if ($user['role'] == 0)
                     <li><a href="/status_pemesanan">Pesanan Saya</a></li>
                     <li><a href="/wishlist">Wishlist</a></li>
-                    <li><a href="/administrasi">Daftar Sebagai Penyedia Jasa</a></li>
+                    <li><a href="{{route('administrasi')}}">Daftar Sebagai Penyedia Jasa</a></li>
                 @elseif ($user['role'] == 1)
                 <li><a href="/datapesanan">Data Pemesanan</a></li>
                     <li><a href="/tambah_katalog">Tambah Katalog</a></li>
