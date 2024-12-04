@@ -1,5 +1,16 @@
 <head>
     <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .container-fluid{
+            display: block;
+            z-index: 9999;
+        }
+
         .custom-bg {
             background-color: #F3F5F9 !important;
 

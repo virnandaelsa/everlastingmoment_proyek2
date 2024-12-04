@@ -1,20 +1,24 @@
 <style>
-    .container {
-      display: flex;
-      height: 100%;
-      width: 100%;
+
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
     }
 
     /* Full-width Banner */
     .banner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100vw; /* Lebar penuh layar */
-        height: 500px; /* Sesuaikan tinggi dengan desain */
-        background-color: #d3cfcf; /* Warna background utama */
-        position: relative;
-    }
+    margin: 0; /* Hilangkan margin */
+    padding: 0; /* Hilangkan padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw; /* Lebar penuh viewport */
+    max-width: 100%; /* Batasi lebar maksimal */
+    height: 500px; /* Sesuaikan tinggi */
+    background-color: #d3cfcf; /* Warna background */
+    position: relative;
+}
 
     /* Bagian Kiri */
     .banner .left {
@@ -155,8 +159,8 @@
 
 
 <div class="category my-4">
-    <h4 class="bold-text" style="margin-bottom: 10px; margin-left: 50px">Kategori</h4>
-    <div class="d-flex flex-wrap justify-content-start">
+    <h4 class="bold-text" style="margin-bottom: 10px margin-left: 50px">Kategori</h4>
+    <div class="d-flex flex-wrap justify-content-start" style="margin-left: 50px">
     {{-- @foreach ([
             ['name' => 'MUA', 'image' => 'Beautician.png'],
             ['name' => 'Dekorasi', 'image' => 'Beautiful Wedding Ribbon.png'],
@@ -184,7 +188,7 @@
 
 
 <div class="recommendations my-4">
-    <h4 class="bold-text" style="margin-left: 50px">Rekomendasi</h4>
+    <h4 class="bold-text" style="text-align: center;">Rekomendasi</h4>
     <div class="d-flex flex-wrap">
         {{-- <div class="card">
             <img style="width: 300px; height:150px" src="{{ asset('images/categories/Beautician.png') }}" class="card-img-top" alt="MUA">
@@ -199,23 +203,23 @@
         @foreach($data2 as $katalog)
         <div class="card">
             <?php
-                if (isset($katalog['detail_katalog'][0]['gambar'])) {
+                if (isset($katalog->dt_katalog[0]->gambar)) {
                     # code...
-                    $gambar = $katalog['detail_katalog'][0]['gambar'];
+                    $gambar = $katalog->dt_katalog[0]->gambar;
                 }
                 else {
                     $gambar=asset("images/logoevmo.png");
                 }
-                if (isset($katalog['detail_katalog'][0]['harga'])) {
+                if (isset($katalog->dt_katalog[0]->harga)) {
                     # code...
-                    $harga = $katalog['detail_katalog'][0]['harga'];
+                    $harga = $katalog->dt_katalog[0]->harga;
                 }
                 else {
                     # code...
                     $harga='';
                 }
             ?>
-            <img src="{{ 'http://127.0.0.1:8000/images/gambar_detail_katalog/'. $gambar }}" onerror="this.onerror=null; this.src='{{ $gambar }}';"
+            <img src="{{filter_var(asset("images/catalogs/$gambar"), FILTER_VALIDATE_URL)}}" onerror="this.onerror=null; this.src='{{ $gambar }}';"
                 class="card-img-top" alt="{{$gambar}}" style="width: 300px; height:150px">
             <div class="card-body">
                 <h5 class="card-title">{{$katalog['judul']}}</h5>

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<link rel="stylesheet" href="{{ asset('css/jasa.css') }}">
 @section('content')
         <div class="main-content">
         {{-- <div class="top-bar">
@@ -15,7 +15,7 @@
             <div class="package col-lg-12 col-sm-8">
             <div class="package row">
             <div class="col-md-6">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <?php $i=0?>
                         @foreach ($data1['detail_katalog'] as $gambar )
@@ -68,7 +68,7 @@
             </div>
         </div>
         <hr>
-        <div class="description">
+        <div class="deskripsi">
             <h2>Deskripsi</h2>
             <p>{{$data1['deskripsi']}}</p>
         </div>
@@ -103,7 +103,7 @@
     @else
     <div class="footer">
         <a href="https://wa.me/{{$data2['detail_penjual']['user']['no_telp']}}"><button class="chat">Chat</button></a>
-        <a href=" {{ route('pesan', $data1['id_katalog']) }} "><button class="order">Pesan</button></a>
+        <a href=" {{ route('pesan', $data1['id_katalog']) }} "><button class="order">Pesan Sekarang</button></a>
     </div>
     @endauth
     </div>

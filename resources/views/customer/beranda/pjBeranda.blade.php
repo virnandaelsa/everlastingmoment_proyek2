@@ -1,103 +1,123 @@
 <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
+
+body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
     }
 
-    .container {
-      display: flex;
-      height: 100%;
-      width: 100%;
-    }
+    /* Full-width Banner */
+    .banner {
+    margin: 0; /* Hilangkan margin */
+    padding: 0; /* Hilangkan padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw; /* Lebar penuh viewport */
+    max-width: 100%; /* Batasi lebar maksimal */
+    height: 500px; /* Sesuaikan tinggi */
+    background-color: #d3cfcf; /* Warna background */
+    position: relative;
+}
 
-
-
-    .right {
-      width: 50%;
-      height: 100%;
-      background-color: #988D8F;
-      padding: 20px 60px ;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .left {
-        background-color: #CFCDD4;
+    /* Bagian Kiri */
+    .banner .left {
         width: 50%;
-        padding: 50px;
+        padding: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Menyelaraskan konten di tengah vertikal */
-        align-items: center; /* Menyelaraskan konten di tengah horizontal */
-        text-align: center; /* Teks diratakan ke tengah */
+        justify-content: center; /* Vertically center the content */
+        align-items: center; /* Horizontally center the content */
+        color: #333;
+        position: relative;
+        z-index: 1;
+        text-align: center; /* Ensure the text is centered */
     }
 
+    .banner .judul {
+        font-family: 'Georgia', serif;
+        font-size: 2.5rem;
+        color: #000;
+    }
 
-    .judul {
-        font-size: 20px; /* Ukuran font besar untuk judul */
-        font-weight: bold; /* Menebalkan teks judul */
-        margin-bottom: 10px; /* Jarak bawah */
-        color: #333; /* Warna teks */
+    .banner .description {
+        font-family: 'Arial', sans-serif;
+        font-size: 1.2rem;
+        color: #000;
+    }
+
+    .banner .btn-primary {
+        font-size: 16px;
+        border-radius: 10px;
+        background-color: #1F4E79;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .banner .btn-primary:hover {
+        background-color: #163B5C;
+    }
+
+    /* Bagian Kanan dengan Carousel */
+    .banner .right {
+        width: 50%; /* Setengah bagian dari banner */
+        height: 100%;
+        position: relative;
+        background-color: #988D8F; /* Warna background di belakang carousel */
+        display: flex;
         justify-content: center;
+        align-items: center;
     }
 
-    .description {
-        font-size: 18px;
-        margin-bottom: 10px; /* Jarak bawah */
-        color: #666; /* Warna teks lebih terang */
+    .banner .carousel-inner img {
+        max-width: 80%; /* Ukuran gambar diperkecil */
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: block; /* Pastikan gambar tidak melampaui container */
+        margin: 0 auto;
+    }
+
+
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%; /* Circular buttons */
+        padding: 10px; /* Increase padding for larger buttons */
+        width: 40px; /* Size of the icon button */
+        height: 40px; /* Size of the icon button */
+        display: flex;
         justify-content: center;
+        align-items: center;
+        border: 2px solid rgba(0, 0, 0, 0.5); /* Optional border for visibility */
     }
 
-    button.btn-primary {
-        font-size: 16px; /* Ukuran font tombol */
-        border-radius: 8px; /* Membuat sudut tombol lebih melengkung */
-        background-color: #365B80; /* Warna latar tombol */
-        color: white; /* Warna teks tombol */
-        cursor: pointer; /* Mengubah kursor ketika tombol dihover */
-        transition: background-color 0.3s ease; /* Efek transisi ketika tombol dihover */
-        justify-content: center;
+    @media (max-width: 768px) {
+        .banner {
+            flex-direction: column;
+            height: auto;
+        }
+        .banner .left, .banner .right {
+            width: 100%;
+        }
+        .banner .carousel-inner img {
+            width: 90%;
+        }
     }
 
-
-
-    button.btn-primary:hover {
-        background-color: #2c4765; /* Warna latar tombol saat dihover */
-    }
-
-    .header-row {
-        display: flex; /* Use flexbox to align items in a row */
-        justify-content: space-between; /* Space out the items to the left and right */
-        align-items: center; /* Vertically center the items */
-        margin: 20px;
-    }
-
-    .bold-text {
-        margin-left: 30px; /* Remove any margin to keep it flush with the left */
-    }
-
-    .btn-primary {
-        background-color: #365B80; /* Set the background color (green) */
-        color: white; /* Set the text color */
-        border-color: #365B80; /* Set the border color to match the background */
-        margin-left: 30px;
+    .header-row{
+        margin-top: 20px;
+        display: flex;
+        justify-content: center; /* Horizontal alignment */
+        align-items: center; /* Vertical alignment */
+        text-align: center;
     }
 
 </style>
-<div class="penawaran my-4">
-    {{-- @auth @if (auth()->user()->role==1) --}}
-    @if($role==1)
-    <h4 class="bold-text">Tambah Katalog Anda Sekarang!</h4>
-    <button class="btn btn-primary" onclick="window.location.href='/tambah_katalog'">Tambah Katalog</button>
-    @endif
-    {{-- @endif @endauth --}}
-</div>
 
-<div class="container">
+<div class="banner">
     <div class="left">
         <h1 class="judul">Everlasting Moments</h1>
         <p class="description">BUAT PERNIKAHAN IMPIAN ANDA MENJADI KENYATAAN</p>
@@ -138,8 +158,7 @@
 @if($role==1)
 <div class="recommendations my-4">
     <div class="header-row">
-        <h6 class="bold-text">KATALOG SAYA</h6>
-        <button class="btn btn-primary" onclick="window.location.href='/tambah_katalog'">Tambah Katalog</button>
+        <h4 class="bold-text">KATALOG SAYA</h6>
     </div>
     <div class="d-flex flex-wrap">
     @foreach($data1 as $katalog)

@@ -1,54 +1,67 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f8f9fa; /* Warna abu-abu muda */
     margin: 0;
     padding: 0;
-    
+    color: #333;
 }
 
 .container {
-    background: linear-gradient(to bottom, #6E9FC1,#6E9FC1, #ffffff);
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #ffffff; /* Warna putih bersih */
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd; /* Tambahkan garis tipis untuk memperjelas */
 }
 
 .header {
-    margin-left: 10px;
+    text-align: center;
     margin-bottom: 20px;
 }
 
 .header img {
-    width: 150px;
+    width: 120px;
     height: auto;
 }
 
 h1 {
     text-align: center;
+    font-size: 24px;
     margin-bottom: 20px;
+    color: #555; /* Warna teks lebih lembut */
 }
 
 form {
     display: flex;
     flex-direction: column;
+    gap: 15px; /* Spasi antar elemen */
 }
 
 label {
-    margin-bottom: 5px;
-    font-size: 14pt;
+    font-size: 16px;
+    font-weight: bold;
+    color: #444; /* Warna label sedikit lebih gelap */
 }
 
 input[type="text"],
 textarea,
 select {
     padding: 10px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid #ccc; /* Border abu-abu lembut */
+    border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #007bff; /* Border biru saat fokus */
+    outline: none;
 }
 
 textarea {
@@ -56,10 +69,9 @@ textarea {
 }
 
 .kategori {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsif dengan ukuran minimum */
     gap: 10px;
-    margin-bottom: 15px;
 }
 
 .kategori div {
@@ -68,34 +80,34 @@ textarea {
 }
 
 .kategori input {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 button {
     padding: 10px;
+    font-size: 14px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
 button[type="submit"] {
-    background-color: #fff;
-    color: #6098e0;
-}
-
-button[type="button"] {
-    background-color: #333;
+    background-color: #007bff; /* Warna biru */
     color: #fff;
 }
 
-button[type="submit"]:hover,
-button[type="button"]:hover {
-    background-color: #0056b3;
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Warna biru lebih gelap */
+}
+
+button[type="button"] {
+    background-color: #6c757d; /* Warna abu-abu gelap */
+    color: #fff;
 }
 
 button[type="button"]:hover {
-    background-color: #5a6268;
+    background-color: #5a6268; /* Warna abu-abu lebih gelap */
 }
 
 .file-upload {
@@ -115,14 +127,25 @@ button[type="button"]:hover {
     position: absolute;
     left: 10px;
     top: 10px;
-    color: #060606;
-    border : #6E9FC1;
-    padding: 5px 10px;
-    border: 2px solid #6E9FC1; /* Ensure border is thick enough to be visible */
+    color: #333;
+    background-color: #e9ecef; /* Background abu-abu lembut */
+    padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
+    border: 1px solid #ccc;
 }
 
 .file-upload label:hover {
-    background: #0056b3;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.alert {
+    font-size: 14px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
 }

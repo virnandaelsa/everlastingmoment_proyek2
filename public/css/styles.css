@@ -1,7 +1,7 @@
 
 .main-content {
+    margin: 0;
     flex-grow: 1;
-    margin-left: 100px; /* Adjust according to the sidebar width */
     padding: 20px;
 
 }

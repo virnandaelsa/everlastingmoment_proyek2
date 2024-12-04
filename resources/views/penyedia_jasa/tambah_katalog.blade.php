@@ -1,14 +1,13 @@
 {{-- @dd($user) --}}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Katalog</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+@extends('layouts.app')
+
+@section('content')
     <style>
         body {
             background-color: #F3F5F9;
+        }
+        .container{
+            margin-top: 20px;
         }
         .form-container {
             background-color: white;
@@ -86,18 +85,7 @@
             margin-left: 10px;
         }
     </style>
-</head>
-<body>
-
     {{-- @dd($data) --}}
-    <div class="top-bar">
-        <img src="{{ asset('images/logoevmo.png') }}" alt="Logo" class="logo">
-        <img src="path/to/profile-picture.jpg" alt="Profile Picture" class="profile-picture rounded-circle">
-    </div>
-
-    <div class="container">
-        <a href="/" class="btn-back mb-3">Kembali</a>
-    </div>
 
     <h2 class="form-title">Tambah Katalog</h2>
     <div class="form-container">
@@ -197,6 +185,11 @@
         </form>
     </div>
 
+    
+    <div class="container">
+        <a href="/" class="btn-back mb-3">Kembali</a>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -235,7 +228,4 @@
 
 
     </script>
-
-
-</body>
-</html>
+@endsection

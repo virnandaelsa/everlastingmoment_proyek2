@@ -3,7 +3,7 @@
 @section('content')
 <style>
     h3 {
-
+        margin-top: 20px;
         font-weight: 600; /* Ketebalan font */
         margin-bottom: 20px; /* Jarak antara heading dan card */
         margin-left: 170px; /* Pusatkan heading di atas card */

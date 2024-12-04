@@ -4,107 +4,154 @@
 
 @section('content')
 <style>
-    body, html {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        height: 100%; /* Ensures the body takes full height */
-    }
+body, html {
+    font-family: 'Poppins', Arial, sans-serif; /* Gunakan font modern */
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Warna latar belakang lembut */
+    height: 100%; /* Pastikan body mengambil tinggi penuh */
+}
 
-    .content {
-        display: flex;
-        width: 90%;
-        align-items: flex-start; /* Aligns the content to the top */
-        height: 100%; /* Ensures the content div takes full height */
-        padding-top: 20px; /* Optional padding for spacing */
-    }
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px; /* Tambahkan ruang di sekitar konten */
+    min-height: 100vh; /* Pastikan konten memenuhi layar */
+}
 
+.profile-info {
+    background-color: #fff; /* Latar belakang putih agar kontras */
+    padding: 30px;
+    border-radius: 15px; /* Sudut melengkung */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Bayangan lebih halus */
+    max-width: 900px; /* Batasi lebar maksimum */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Spasi antar elemen */
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.profile-pic {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #365B80;
+    transition: transform 0.3s ease; /* Animasi ketika hover */
+}
+
+.profile-pic:hover {
+    transform: scale(1.1); /* Perbesar gambar saat hover */
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.username {
+    font-size: 26px;
+    font-weight: 600;
+    color: #365B80; /* Warna teks biru gelap */
+    margin-bottom: 8px;
+}
+
+.name {
+    font-size: 20px;
+    color: #6c757d; /* Warna teks abu-abu */
+    font-style: italic;
+}
+
+.info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info ul li {
+    font-size: 18px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f1f3f5; /* Latar belakang abu-abu lembut */
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.info ul li:hover {
+    background-color: #365B80; /* Warna latar belakang berubah saat hover */
+    color: #fff; /* Teks menjadi putih */
+    transform: translateY(-5px); /* Efek mengangkat sedikit */
+}
+
+.info ul li a {
+    text-decoration: none;
+    color: inherit; /* Gunakan warna teks default */
+    width: 100%;
+    display: block;
+}
+
+.info ul li a:hover {
+    text-decoration: underline; /* Garis bawah saat hover pada link */
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #dc3545; /* Warna merah */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    width: auto;
+}
+
+button:hover {
+    background-color: #c82333; /* Merah gelap saat hover */
+}
+
+@media (max-width: 768px) {
     .profile-info {
-        padding: 10px;
-        border-radius: 8px;
-        /* Remove margin-top to ensure it sticks to the top */
-    }
-
-    .profile-info ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .profile-info li {
-        margin-bottom: 10px;
-        border-bottom: 1px solid #ddd; /* Garis bawah setiap item dalam profile-info */
-        padding-bottom: 15px; /* Ruang antara garis bawah dan teks */
-    }
-
-    .profile-info a {
-        text-decoration: none;
-        color: #000; /* Default link color (blue) */
-    }
-
-    .profile-info a:hover {
-        color: #365B80; /* Gray color on hover */
-    }
-
-    .pro {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        padding: 20px;
     }
 
     .profile {
-        display: flex;
+        flex-direction: column;
         align-items: center;
     }
 
     .profile-pic {
-        width: 120px; /* Sesuaikan ukuran */
-        height: 120px; /* Pastikan tinggi dan lebar sama untuk bentuk lingkaran */
-        border-radius: 50%; /* Membuat gambar menjadi lingkaran */
-        object-fit: cover; /* Memastikan gambar memenuhi lingkaran tanpa terdistorsi */
-        border: 2px solid #365B80; /* Border opsional */
-        margin-left: 40px;
-    }
-
-    .user-info {
-        display: flex;
-        flex-direction: column;
+        margin-bottom: 15px;
     }
 
     .username, .name {
-        margin-left: 20px;
-    }
-    .username{
-        font-size: 25px;
-        font-weight: 500;
-    }
-    .name{
-        font-size: 26px;
-        font-style: italic;
-    }
-
-    .info {
-        margin-top: 30px; /* Mengatur margin atas */
-        margin-left: 30px;
-        width: 1230px;
-    }
-
-    .info ul {
-        list-style-type: none; /* Menghilangkan bullet points pada list */
-        padding: 0; /* Menghilangkan padding default pada list */
-        margin: 0; /* Menghilangkan margin default pada list */
+        text-align: center;
     }
 
     .info ul li {
-        font-size: 18px; /* Memperbesar ukuran teks */
-        border-bottom: 2px solid #ccc; /* Garis bawah pada setiap item */
-        padding: 12px 0; /* Jarak antara teks dan garis bawah */
-        width: 100%; /* Menjadikan item selebar card */
-        margin-bottom: 8px; /* Jarak antar item */
+        font-size: 16px;
     }
 
-    .info ul li:last-child {
-        border-bottom: none; /* Menghapus garis bawah pada item terakhir */
+    button {
+        font-size: 14px;
+        padding: 10px 20px;
     }
+}
+
 </style>
 
 <div class="content">
@@ -130,19 +177,16 @@
                 <li><a href="/account">Informasi Akun</a></li>
                 @if ($user['role'] == 0)
                     <li><a href="/status_pemesanan">Pesanan Saya</a></li>
-                    <li><a href="/wishlist">Wishlist</a></li>
                     <li><a href="{{route('administrasi')}}">Daftar Sebagai Penyedia Jasa</a></li>
                 @elseif ($user['role'] == 1)
                 <li><a href="/datapesanan">Data Pemesanan</a></li>
                     <li><a href="/tambah_katalog">Tambah Katalog</a></li>
                     <li><a href="/">Katalog Saya</a></li>
                 @endif
-                <li>
                     <form action="/logout" method="post">
                     @csrf
                     <button type="submit" class="btn btn-danger">Keluar</button>
                     </form>
-                </li>
             </ul>
         </div>
 

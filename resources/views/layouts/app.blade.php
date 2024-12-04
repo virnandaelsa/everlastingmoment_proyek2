@@ -18,8 +18,6 @@
 </head>
 <body>
     @include('partials.sidebar')
-    <div class="container-fluid">
-        @yield('content')
-    </div>
+    @yield('content')
 </body>
 </html>
