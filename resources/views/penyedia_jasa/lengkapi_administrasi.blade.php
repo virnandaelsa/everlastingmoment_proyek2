@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +13,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
-<div class="header text-center bg-dark text-white py-3">
+<!-- <div class="header text-center bg-dark text-white py-3">
     <img src="{{ asset('images/logoevmo.png') }}" alt="Logo" class="img-fluid" style="max-width: 150px;">
-</div>
+</div> -->
 <div class="container mt-5">
     <div class="d-">
         @if ($errors->any())
@@ -140,3 +144,5 @@
 </script>
 </body>
 </html>
+
+@endsection

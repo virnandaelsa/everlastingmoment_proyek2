@@ -135,8 +135,7 @@
             </div> --}}
 
             <div class="tax-warning" id="tax-warning" >
-                * Setiap transaksi dikenakan pajak Rp.100.000,00 silahkan tambahkan harga pokok produk jasa anda <br>
-                  Transaksi minimal Rp.1.000.000,00
+                * Setiap transaksi dikenakan pajak 2,5%
             </div>
 
             <div id="service-details-container">

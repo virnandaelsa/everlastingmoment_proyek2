@@ -130,7 +130,7 @@
     <div class="left">
         <h1 class="judul">Everlasting Moments</h1>
         <p class="description">BUAT PERNIKAHAN IMPIAN ANDA MENJADI KENYATAAN</p>
-        <button class="btn btn-primary">Tambah Katalog</button>
+        <button class="btn btn-primary" id="pesanSekarang">Pesan Sekarang</button>
     </div>
     <div class="right">
         <div id="weddingCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -187,7 +187,7 @@
 
 
 
-<div class="recommendations my-4">
+<div class="recommendations my-4" id="recommendationSection">
     <h4 class="bold-text" style="text-align: center;">Rekomendasi</h4>
     <div class="d-flex flex-wrap">
         {{-- <div class="card">
@@ -235,3 +235,11 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+        // Menggulung ke bagian bawah ketika tombol ditekan
+        document.getElementById("pesanSekarang").addEventListener("click", function() {
+            const targetSection = document.getElementById("recommendationSection");
+            targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+    </script>
