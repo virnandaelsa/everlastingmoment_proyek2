@@ -217,23 +217,36 @@ class KatalogCustomerController extends Controller
     }
     public function status_pesanan()
     {
-        $data1 = transaksi::with('dt_transaksi')->get()->where('id_user','=',auth()->user()->id_user)
-                                                        ->where('status','=',1);
-        $data2 = transaksi::with('dt_transaksi')->get()->where('id_user','=',auth()->user()->id_user)
-                                                        ->where('status','=',2);
-        $data3 = transaksi::with('dt_transaksi')->get()->where('id_user','=',auth()->user()->id_user)
-                                                        ->where('status','=',3);
-        $data4 = transaksi::with('dt_transaksi')->get()->where('id_user','=',auth()->user()->id_user)
-                                                        ->where('status','=',4);
+        // $data1 = transaksi::with('dt_transaksi')->get()->where('id_user','=',auth()->user()->id_user)
+        //                                                 ->where('status','=',1);
+        // $data2 = transaksi::with('dt_transaksi')->get()->where('id_user','=',auth()->user()->id_user)
+        //                                                 ->where('status','=',2);
+        // $data3 = transaksi::with('dt_transaksi')->get()->where('id_user','=',auth()->user()->id_user)
+        //                                                 ->where('status','=',3);
+        // $data4 = transaksi::with('dt_transaksi')->get()->where('id_user','=',auth()->user()->id_user)
+        //                                                 ->where('status','=',4);
         // dd($data4);
         // $data2;
-        foreach ($data1 as $data) {
-            $eloq[]=1;
-        }
+        // foreach ($data1 as $data) {
+        //     $eloq[]=1;
+        // }
         // dd($eloq);
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/pesan_status', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . session("token")
+            ]
+        ]);
+
+        $data1 = json_decode($response->getBody()->getContents(), true);
+
+        dd($data1['data']['status_pesan']);
+
         return view('customer.status_pesanan',
         [
-            'data1' => $data1,
+            'data1' => $data1['data']['status_pesan'],
             // 'data2' => $data2,
             ]
         );
@@ -704,9 +717,22 @@ class KatalogCustomerController extends Controller
 
     public function datapesanan()
     {
-        $data = transaksi::with('pengguna', 'katalog.detailPJ', 'katalog.dt_katalog')->get();
+        // $data = transaksi::with('pengguna', 'katalog.detailPJ', 'katalog.dt_katalog')->get();
+
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/pesan', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . session("token")
+            ]
+        ]);
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
         return view('penyedia_jasa.data_pesanan',[
-            'data' => $data,
+            'data' => $data['data']['data_pesan'],
         ]);
     }
 

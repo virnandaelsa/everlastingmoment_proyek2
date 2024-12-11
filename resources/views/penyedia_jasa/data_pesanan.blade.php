@@ -105,18 +105,19 @@
             </tr>
             {{-- {{dd($data2)}} --}}
             @php
+                // dd($data);
                 $i = 0
             @endphp
             @foreach ($data as $item)
 
             <tr>
                 <td>{{ $i+=1 }}</td>
-                <td>{{ $item->pengguna->nama }}</td>
-                <td>{{ ($item->dt_katalog) }}</td>
-                <td>{{ $item->tanggal }}</td>
-                <td>{{ $item->status == 1 ? 'Pengajuan' : ($item->status == 2 ? 'Diterima' : 'Ditolak') }}</td>
+                <td>{{ $item['user']['nama'] }}</td>
+                <td>{{ $item['katalog']['judul'] }}</td>
+                <td>{{ $item['tanggal'] }}</td>
+                <td>{{ $item['status'] == 1 ? 'Pengajuan' : ($item['status'] == 2 ? 'Diterima' : 'Ditolak') }}</td>
                 <td>Lunas</td>
-                <td><a href="/pemesanan/{{ $item->id_transaksi }}"><img src="{{ asset('icon/actoin.png') }}" alt="Detail Pesanan" style="width: 30px;"></a></td>
+                <td><a href="/pemesanan/{{ $item['id_transaksi'] }}"><img src="{{ asset('icon/actoin.png') }}" alt="Detail Pesanan" style="width: 30px;"></a></td>
             </tr>
             @endforeach
 
